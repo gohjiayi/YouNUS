@@ -3,7 +3,7 @@ import DashboardLayout from "@/pages/Layout/DashboardLayout.vue";
 import Overview from "@/pages/Overview.vue";
 import Projects from "@/pages/Projects.vue";
 import Resources from "@/pages/Resources.vue";
-import GanttChart from "@/pages/GanttChart.vue";
+import GanttChart from "@/pages/Gantt.vue";
 import Meeting from "@/pages/Meeting.vue";
 import Tasks from "@/pages/Tasks.vue";
 import Teammates from "@/pages/Teammates.vue";

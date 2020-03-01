@@ -31,6 +31,11 @@ import MaterialDashboard from "./material-dashboard";
 
 import Chartist from "chartist";
 import firebase from 'firebase';
+import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-vue/dist/bootstrap-vue.css';
+Vue.use(BootstrapVue);
+Vue.config.productionTip = false
 
 // configure router
 const router = new VueRouter({
