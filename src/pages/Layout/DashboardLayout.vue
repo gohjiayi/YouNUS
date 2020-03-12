@@ -4,10 +4,6 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <side-bar>
       <mobile-menu slot="content"></mobile-menu>
-      <sidebar-link to="/overview">
-        <md-icon>info</md-icon>
-        <p>Overview</p>
-      </sidebar-link>
       <sidebar-link to="/projects">
         <md-icon>assignment</md-icon>
         <p>Projects</p>
@@ -20,9 +16,9 @@
         <md-icon>low_priority</md-icon>
         <p>Gantt Chart</p>
       </sidebar-link>
-      <sidebar-link to="/meeting">
-        <md-icon>meeting_room</md-icon>
-        <p>Meeting</p>
+      <sidebar-link to="/calendar">
+        <md-icon>calendar_today</md-icon>
+        <p>Calendar</p>
       </sidebar-link>
       <sidebar-link to="/tasks">
         <md-icon>check_box</md-icon>

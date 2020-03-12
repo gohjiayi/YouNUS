@@ -52,14 +52,14 @@ Vue.use(GlobalDirectives);
 Vue.use(Notifications);
 
 firebase.initializeApp({
-    apiKey: "AIzaSyCdur19NdlgIqnWrvHSN_olSA6FxrR_aj4",
-    authDomain: "bt3103-1c69a.firebaseapp.com",
-    databaseURL: "https://bt3103-1c69a.firebaseio.com",
-    projectId: "bt3103-1c69a",
-    storageBucket: "bt3103-1c69a.appspot.com",
-    messagingSenderId: "898642862928",
-    appId: "1:898642862928:web:9d43e0d5ed8f36e6778255",
-    measurementId: "G-KKVKMJMMHY"
+    apiKey: "AIzaSyDndH7Svdrup3iy5t1UejbE2G9-ODXSBKc",
+    authDomain: "younus-144b9.firebaseapp.com",
+    databaseURL: "https://younus-144b9.firebaseio.com",
+    projectId: "younus-144b9",
+    storageBucket: "younus-144b9.appspot.com",
+    messagingSenderId: "100706729397",
+    appId: "1:100706729397:web:57cff026c19cad38d66dfc",
+    measurementId: "G-RJ91H0B48C"
 });
 
 /* eslint-disable no-new */

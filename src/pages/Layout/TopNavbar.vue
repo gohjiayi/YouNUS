@@ -27,8 +27,8 @@
           </div>
           <md-list>
             <md-list-item href="#/">
-              <i class="material-icons">info</i>
-              <p class="hidden-lg hidden-md">Overview</p>
+              <i class="material-icons">assignment</i>
+              <p class="hidden-lg hidden-md">Projects</p>
             </md-list-item>
 
             <!-- <md-list-item href="#/notifications" class="dropdown">
