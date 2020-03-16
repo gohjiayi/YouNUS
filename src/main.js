@@ -62,6 +62,18 @@ firebase.initializeApp({
     measurementId: "G-RJ91H0B48C"
 });
 
+
+//Calendar 
+import Vuetify from 'vuetify'
+import DaySpanVuetify from 'dayspan-vuetify'
+
+Vue.use(Vuetify);
+Vue.use(DaySpanVuetify, {
+  methods: {
+    getDefaultEventColor: () => '#1976d2'
+  }
+});
+
 /* eslint-disable no-new */
 new Vue({
   el: "#app",

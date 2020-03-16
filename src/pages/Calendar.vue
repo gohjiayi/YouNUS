@@ -6,16 +6,19 @@
 
 <script>
 import { Calendar } from 'dayspan';
+//import 'vuetify/dist/vuetify.min.css'
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
+import 'dayspan-vuetify/dist/lib/dayspan-vuetify.min.css'
 
 export default {
-  name: 'App',
+  name: 'app',
   data: () => ({
     calendar: Calendar.months()
   })
 }
 </script>
 
-<style>
+<style scoped>
 body, html, #app, #dayspan {
   font-family: Roboto, sans-serif;
   width: 100%;
