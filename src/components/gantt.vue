@@ -44,6 +44,33 @@ export default {
         gantt.$_dataProcessorInitialized = true;
       // }
     },
+    createOwnerElement() {
+      let gantt_cal_light = document.getElementsByClassName("gantt_cal_light")[0];
+      if (gantt_cal_light) gantt_cal_light.style.height = "auto";
+      
+      let gantt_cal_larea = document.getElementsByClassName("gantt_cal_larea")[0];
+      if (gantt_cal_larea) gantt_cal_larea.style.height = "auto";
+
+      let newItem = document.createElement("div");
+      newItem.className = "owner-list";
+      let textnode = document.createTextNode("Owner");
+      newItem.appendChild(textnode);
+
+      let select = document.createElement("SELECT");
+      select.id = "selectElementId";
+      newItem.appendChild(select);
+
+      var list = document.getElementsByClassName("gantt_cal_larea");
+
+      if (list[0]) list[0].insertBefore(newItem, list[0].childNodes[2]);
+
+      for (var i = 0; i< user.length; i++) {
+          var opt = document.createElement('option');
+          opt.value = user[i];
+          opt.innerHTML = user[i];
+          if (selectEl) selectEl.appendChild(opt);
+      }
+    },
     changeEvents() {
     }
   },
