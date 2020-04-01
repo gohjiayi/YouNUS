@@ -64,6 +64,9 @@ export default {
 
       if (list[0]) list[0].insertBefore(newItem, list[0].childNodes[2]);
 
+      var user = ["Jnson", "Mark", "Ponting", "lee"],
+          selectEl = document.getElementById('selectElementId');
+
       for (var i = 0; i< user.length; i++) {
           var opt = document.createElement('option');
           opt.value = user[i];
