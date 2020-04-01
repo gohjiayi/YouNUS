@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <!-- <div class="content">
     <div class="md-layout">
       <div
         class="md-layout-item md-medium-size-30 md-xsmall-size-50 md-size-25"
@@ -23,21 +23,26 @@
         </stats-card>
       </div>
     </div>
-  </div>
+  </div> -->
+  <v-app id="dayspan" v-cloak>
+    <ds-calendar-app :calendar="calendar"></ds-calendar-app>
+  </v-app>
 </template>
 
 <script>
-import {
-  StatsCard
-} from "@/components";
+// import {
+//   StatsCard
+// } from "@/components";
+import { Calendar } from 'dayspan';
 
 export default {
   components: {
-    StatsCard
+    //StatsCard
   },
+  name: 'app',
   data() {
     return {
-      
+      calendar: Calendar.months()
     };
   }
 };

@@ -17,9 +17,14 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import App from "./App";
+import Vuetify from 'vuetify'
+import DaySpanVuetify from 'dayspan-vuetify'
 
 // router setup
 import routes from "./routes/routes";
+import 'vuetify/dist/vuetify.min.css';
+import 'material-design-icons-iconfont/dist/material-design-icons.css';
+import 'dayspan-vuetify/dist/lib/dayspan-vuetify.min.css';
 
 // Plugins
 import GlobalComponents from "./globalComponents";
@@ -44,12 +49,20 @@ const router = new VueRouter({
 });
 
 Vue.prototype.$Chartist = Chartist;
+Vue.config.productionTip = false
 
 Vue.use(VueRouter);
 Vue.use(MaterialDashboard);
 Vue.use(GlobalComponents);
 Vue.use(GlobalDirectives);
 Vue.use(Notifications);
+
+Vue.use(DaySpanVuetify, {
+  methods: {
+    getDefaultEventColor: () => '#1976d2'
+  }
+});
+
 
 firebase.initializeApp({
     apiKey: "AIzaSyDndH7Svdrup3iy5t1UejbE2G9-ODXSBKc",
@@ -60,6 +73,18 @@ firebase.initializeApp({
     messagingSenderId: "100706729397",
     appId: "1:100706729397:web:57cff026c19cad38d66dfc",
     measurementId: "G-RJ91H0B48C"
+});
+
+
+//Calendar 
+import Vuetify from 'vuetify'
+import DaySpanVuetify from 'dayspan-vuetify'
+
+Vue.use(Vuetify);
+Vue.use(DaySpanVuetify, {
+  methods: {
+    getDefaultEventColor: () => '#1976d2'
+  }
 });
 
 /* eslint-disable no-new */
