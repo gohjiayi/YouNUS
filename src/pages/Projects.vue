@@ -24,9 +24,16 @@
       </div>
     </div>
   </div> -->
-  <v-app id="dayspan" v-cloak>
-    <ds-calendar-app :calendar="calendar"></ds-calendar-app>
-  </v-app>
+  <!-- <div class="container"> -->
+    <v-app class="calendar-container" id="dayspan" v-cloak>
+      <ds-calendar-app :calendar="calendar" 
+        @click:event="showEvent"
+        @click:more="viewDay"
+        @click:date="viewDay"
+        @change="updateRange">
+      </ds-calendar-app>
+    </v-app>
+  <!-- </div> --> 
 </template>
 
 <script>
@@ -35,6 +42,8 @@
 // } from "@/components";
 import { Calendar } from 'dayspan';
 
+
+// import * as moment from 'moment'
 export default {
   components: {
     //StatsCard
@@ -44,7 +53,25 @@ export default {
     return {
       calendar: Calendar.months()
     };
+  },
+
+  methods: {
+  },
+  mounted() {
+    let navigationDrawer = document.getElementsByClassName("v-navigation-drawer")[0];
+    if (navigationDrawer) navigationDrawer.style.marginLeft = "19%";
+    
+    let calendarTopBar = document.getElementsByClassName("ds-app-calendar-toolbar")[0];
+    if (calendarTopBar) {
+      calendarTopBar.style.marginLeft = "19%";
+      calendarTopBar.style.width = "81%";
+    }
   }
 };
 </script>
 
+<style lang="scss" scoped>
+    .v-navigation-drawer-close {
+      z-index: -10;
+    }
+</style>
