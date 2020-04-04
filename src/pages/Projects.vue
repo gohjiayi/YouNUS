@@ -8,7 +8,8 @@
         @change ="saveState"
         @event-create="eventCreate($event)"
       >
-
+      
+      {{events}}
       <!-- <template slot="title">
         DaySpan
       </template> -->
@@ -250,6 +251,11 @@ export default {
       }
     ]
   }),
+  computed: {
+    events() {
+      return this.$store.state.events
+    }
+  },
   mounted() {
     let navigationDrawer = document.getElementsByClassName(
       "v-navigation-drawer"
@@ -267,6 +273,9 @@ export default {
   
     window.app = this.$refs.app;
     this.loadState();
+        
+    console.log("this.$store.state.invoice", this.$store.state.events);
+    
   },
   methods:{
     getCalendarTime(calendarEvent) {
