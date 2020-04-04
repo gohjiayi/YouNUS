@@ -22,3 +22,9 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+## dayspan-vuetify-example
+https://github.com/ClickerMonkey/dayspan-vuetify-example/blob/master/src/App.vue
+
+## dhtmlx gantt chart 
+https://dhtmlx.com/blog/use-dhtmlxgantt-vue-js-framework-demo/
