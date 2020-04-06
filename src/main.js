@@ -36,13 +36,17 @@ import Notifications from "./components/NotificationPlugin";
 import MaterialDashboard from "./material-dashboard";
 
 import Chartist from "chartist";
-import firebase from 'firebase';
+//import firebase from 'firebase';
+
 import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 // Vuex Store
 import store from './store/store'
+
+// Firebase
+// import '@/firebase/firebaseConfig'
 
 Vue.use(BootstrapVue);
 Vue.config.productionTip = false
@@ -70,16 +74,16 @@ Vue.use(DaySpanVuetify, {
 });
 
 
-firebase.initializeApp({
-    apiKey: "AIzaSyDndH7Svdrup3iy5t1UejbE2G9-ODXSBKc",
-    authDomain: "younus-144b9.firebaseapp.com",
-    databaseURL: "https://younus-144b9.firebaseio.com",
-    projectId: "younus-144b9",
-    storageBucket: "younus-144b9.appspot.com",
-    messagingSenderId: "100706729397",
-    appId: "1:100706729397:web:57cff026c19cad38d66dfc",
-    measurementId: "G-RJ91H0B48C"
-});
+// firebase.initializeApp({
+//     apiKey: "AIzaSyDndH7Svdrup3iy5t1UejbE2G9-ODXSBKc",
+//     authDomain: "younus-144b9.firebaseapp.com",
+//     databaseURL: "https://younus-144b9.firebaseio.com",
+//     projectId: "younus-144b9",
+//     storageBucket: "younus-144b9.appspot.com",
+//     messagingSenderId: "100706729397",
+//     appId: "1:100706729397:web:57cff026c19cad38d66dfc",
+//     measurementId: "G-RJ91H0B48C"
+// });
 
 
 Vue.use(Vuetify);
