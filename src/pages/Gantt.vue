@@ -1,25 +1,130 @@
 <template>
-  <div ref="gantt"></div> 
+  <div class="container gantt-containet">
+    <ganttComponent id="js-gantt-container" class="left-container" :tasks="tasks.data && tasks.data.length ? tasks : ganttData"
+      @task-updated="logTaskUpdate" @link-updated="logLinkUpdate" 
+      @taskSelected="selectTask()">
+    </ganttComponent>
+
+    <div class="download-containet">
+      <button type="button" class="btn btn-danger download" @click="downloadProcess">Download</button>
+    </div>
+  </div>
 </template>
  
 <script>
-import {gantt} from 'dhtmlx-gantt';
+
+import ganttComponent from "@/components/gantt";
+import { mapActions, mapGetters } from "vuex";
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+
 export default {
   name: 'gantt',
-  props: {
-    tasks: {
-      type: Object,
-      default () {
-        return {data: [], links: []}
+  components: {ganttComponent},
+  data () {
+    return {
+      messages: [],
+      ganttData: {
+        data: [], links: []
       }
     }
   },
+  computed: {
+    ...mapGetters("gantt", ["gantt"]),
+    tasks() {
+      let gantt = this.$store.state.gantt.gantt,
+          task = {
+            data: [], link: []
+          };
+
+      if (gantt.data) {
+        task = {
+          data: gantt && gantt.data ? gantt.data : [],
+          links: gantt && gantt.links ? gantt.links : [],
+        }
+      }
+      return task
+    }
+  },
+  methods: {
+    ...mapActions("gantt",["FETCH_GANTTS", "ADD_TASK_GANTT", "UPDATE_TASK_GANTT", "ADD_TASK_LINK", "UPDATE_TASK_LINK"]), //, ["FETCH_EVENTS", "ADD_EVENTS", "UPDATE_EVENTS"]
+    addMessage (message) {
+      console.log("message", message);
+    },
  
-  mounted: function () {
-    gantt.config.xml_date = "%Y-%m-%d";
-    gantt.config.autosize = "y";
-    gantt.init(this.$refs.gantt);
-    gantt.parse(this.$props.tasks);
+    async logTaskUpdate (id, mode, task) {
+      if (mode === "create") {
+        delete task.id
+        await this.ADD_TASK_GANTT(task).then(res => {
+            console.log("res", res);
+            this.FETCH_GANTTS();
+        })
+        .catch(err => {
+          console.log(
+            `add : ${err}`
+          );
+        });
+        
+      } else if (mode === "update") {
+        console.log("task", task);
+        
+        await this.UPDATE_TASK_GANTT(task).then(res => {
+          console.log("res", res);
+          this.FETCH_GANTTS();
+        })
+        .catch(err => {
+          console.log(
+            `update : ${err}`
+          );
+        });
+      }
+    },
+ 
+    async logLinkUpdate (id, mode, link) {
+      if (mode === "create") {
+        delete link.id
+        await this.ADD_TASK_LINK(link).then(res => {
+            console.log("res", res);
+            this.FETCH_GANTTS();
+        })
+        .catch(err => {
+          console.log(
+            `add : ${err}`
+          );
+        });
+      } else if (mode === "update") {
+        await this.UPDATE_TASK_LINK(link).then(res => {
+          console.log("res", res);
+          this.FETCH_GANTTS();
+        })
+        .catch(err => {
+          console.log(
+            `update : ${err}`
+          );
+        });
+      }
+    },
+
+    selectTask: function(task){
+      console.log("task 134", task);
+    },
+    createOwnerElement() {
+      let newItem = document.createElement("div");
+      let textnode = document.createTextNode("Water");
+      newItem.appendChild(textnode);
+
+      var list = document.getElementsByClassName("gantt_cal_larea");
+      console.log("list", list);
+      
+      if (list[0]) list[0].insertBefore(newItem, list[0].childNodes[2]);
+    },
+  },
+
+  created() {
+    // this.FETCH_GANTTS();
+  },
+  async mounted() {
+    this.ganttData = await this.FETCH_GANTTS();
   }
 }
 </script>
