@@ -1,7 +1,17 @@
-//import { Weekday, Month } from "dayspan";
+// import { Weekday, Month } from "dayspan";
 
 const state = {
-  events:[]
+  events: [],
+  gantt: {
+    data: [
+    ],
+    links: [
+    ]
+  },
+  tasks: [],
+  notes: [],
+  stickyNotes: [],
+  comments: []
 };
 
-export default state 
+export default state
