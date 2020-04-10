@@ -63,22 +63,25 @@
 </template>
 
 <script>
-import { Calendar } from 'dayspan';
+import { Calendar } from "dayspan";
 import Vue from "vue";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "app",
   data: () => ({
-    storeKey: "dayspanState",
+    storeKey: "dayspanStates",
     calendar: Calendar.months(),
     readOnly: false,
-    defaultEvents: {}
+    defaultEvents: {},
+    demo: {}
   }),
   computed: {
     ...mapGetters("events", ["events"]),
     events() {
-      return this.$store.state.events;
+      let data = this.$store.state.events;
+      console.log("data 82", data);
+      return data;
     }
   },
   methods: {
@@ -96,38 +99,17 @@ export default {
       }
       return sa === ea ? sh + " - " + eh + ea : sh + sa + " - " + eh + ea;
     },
-    eventCreate(event) {
-      console.log("event", event);
-      // let sch = event.schedule || null;
-      // let schedule = {
-      //   times: sch && sch.times ? sch.times : [],
-      //   duration: sch && sch.duration ? sch.duration : '',
-      //   durationUnit: sch && sch.durationUnit ? sch.durationUnit : "",
-      //   dayOfWeek: sch && sch.dayOfWeek() ? sch.dayOfWeek().input : [],
-      //   weekspanOfMonth: ,
-      //   lastDayOfMonth: ,
-      //   lastWeekspanOfMonth: ,
-      //   month: ,
-      //   dayOfMonth
-      // }
-      // let data = {
-      //   data: event.data,
-      //   schedule: ""
-      // }
-      // let state = this.calendar.toInput(true);
-    },
-    async saveState() {
+    async eventCreate() {
+      console.log("event", this.events.events);
       let state = this.calendar.toInput(true);
-      let json = JSON.stringify(state);
-      localStorage.setItem(this.storeKey, json);
-
-      console.log("this.events.events", this.events.events);
-
-            
+      console.log("state", state);
       
-      if (this.events && this.events.events && this.events.events.id) {
+      if (this.events && this.events.events && this.events.events.id ) {
         state.id = this.events.events.id;
+        
         if (state.id) {
+          console.log("update");
+        
           await this.UPDATE_EVENTS(state).then(res => {
               this.getEventsData();
               console.log("res", res);
@@ -140,6 +122,8 @@ export default {
             });
         }
       } else {
+        console.log("add");
+        
         await this.ADD_EVENTS(state).then(res => {
               this.getEventsData();
               console.log("res", res); 
@@ -150,11 +134,70 @@ export default {
             );
           });
       }
+      
+      // let sch = event.schedule || null;
+      
+      // let schedule = {
+      //   times: sch && sch.times ? sch.times : [],
+      //   duration: sch && sch.duration ? sch.duration : '',
+      //   durationUnit: sch && sch.durationUnit ? sch.durationUnit : "",
+      //   dayOfWeek: sch && sch.dayOfWeek() ? sch.dayOfWeek().input : [],
+      //   weekspanOfMonth: ,
+      //   lastDayOfMonth: ,
+      //   lastWeekspanOfMonth: ,
+      //   month: ,
+      //   dayOfMonth
+      // }
+      
+      // let data = {
+      //   data: event.data,
+      //   schedule: ""
+      // }
+      
+      // let state = this.calendar.toInput(true);
+      
+      // console.log("data", state);
+    },
+    async saveState() {
+      // let state = this.calendar.toInput(true);
+      // let json = JSON.stringify(state);
+      // localStorage.setItem(this.storeKey, json);
+      
+      // var parsedobj = JSON.parse(JSON.stringify(this.events))
+      
+      // if (parsedobj.events && parsedobj.events.id ) {
+      //   state.id = parsedobj.events.id;
+      
+      //   if (state.id) {
+      //     console.log("update");
+        
+      //     await this.UPDATE_EVENTS(state).then(res => {
+      //         this.getEventsData();
+      //         console.log("res", res);
+              
+      //       })
+      //       .catch(err => {
+      //         console.log(
+      //           `ERROR : VIEWS : DataViewSidebar.vue : submitData -> ADD NEW : ${err}`
+      //         );
+      //       });
+      //   }
+      // } else {
+      //   await this.ADD_EVENTS(state).then(res => {
+      //         this.getEventsData();
+      //         console.log("res", res); 
+      //     })
+      //     .catch(err => {
+      //       console.log(
+      //         `ERROR : VIEWS : DataViewSidebar.vue : submitData -> ADD NEW : ${err}`
+      //       );
+      //     });
+      // }
     },
     loadState() {
       let state = {};
       try {
-        let savedState = JSON.parse(localStorage.getItem(this.storeKey));
+        let savedState = this.events.events; //JSON.parse(localStorage.getItem(this.storeKey));
         if (savedState) {
           state = savedState;
           state.preferToday = false;
@@ -172,8 +215,10 @@ export default {
           ev.data = Vue.util.extend(defaults, ev.data);
         });
       }
+      
       this.$refs.app.setState(state);
     },
+    
     async getEventsData() {
       let data =  await this.FETCH_EVENTS();
       let json = JSON.stringify(data);
@@ -182,6 +227,7 @@ export default {
   },
   async created() {
     this.FETCH_EVENTS();
+    
     this.defaultEvents = await this.getEventsData();
   },
   mounted() {
@@ -189,6 +235,7 @@ export default {
       "v-navigation-drawer"
     )[0];
     if (navigationDrawer) navigationDrawer.style.marginLeft = "19%";
+    
     let calendarTopBar = document.getElementsByClassName(
       "ds-app-calendar-toolbar"
     )[0];
@@ -196,7 +243,9 @@ export default {
       calendarTopBar.style.marginLeft = "19%";
       calendarTopBar.style.width = "81%";
     }
+    
     window.app = this.$refs.app;
+    
     this.loadState();
   }
 };
@@ -208,11 +257,11 @@ export default {
   background-color: #f5f5f5 !important;
   margin-bottom: 8px !important;
 }
+
 .v-menu__activator {
   align-items: center;
   cursor: pointer;
   display: flex;
   position: relative;
 }
-
 </style>
