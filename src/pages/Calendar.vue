@@ -108,8 +108,6 @@ export default {
         state.id = this.events.events.id;
         
         if (state.id) {
-          console.log("update");
-        
           await this.UPDATE_EVENTS(state).then(res => {
               this.getEventsData();
               console.log("res", res);
@@ -122,8 +120,6 @@ export default {
             });
         }
       } else {
-        console.log("add");
-        
         await this.ADD_EVENTS(state).then(res => {
               this.getEventsData();
               console.log("res", res); 
@@ -197,6 +193,8 @@ export default {
     loadState() {
       let state = {};
       try {
+        console.log("this.events.events", this.events.events);
+        
         let savedState = this.events.events; //JSON.parse(localStorage.getItem(this.storeKey));
         if (savedState) {
           state = savedState;
