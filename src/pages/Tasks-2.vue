@@ -277,7 +277,6 @@
     export default {
         components: {
             // StatsCard
-            // eslint-disable-next-line vue/no-unused-components
             VueTagsInput
         },
         mixins:[GLOBAL],

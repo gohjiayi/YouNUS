@@ -1,10 +1,10 @@
 <template>
-  <div ref="gantt"></div> 
+  <div ref="gantt"></div>
 </template>
- 
+
 <script>
 import {gantt} from 'dhtmlx-gantt';
-import $ from 'jquery'
+// import $ from 'jquery'
 export default {
   props: {
     tasks: {
@@ -22,7 +22,7 @@ export default {
           setTimeout(() => {
             this.createOwnerElement();
           })
-          
+
           this.$emit('taskSelected', task);
         });
         gantt.attachEvent('onTaskIdChange', (id, new_id) => {
@@ -38,7 +38,7 @@ export default {
       // if (!gantt.$_dataProcessorInitialized) {
         gantt.createDataProcessor((entity, action, data, id) => {
           console.log("entity", entity);
-          
+
           this.$emit(`${entity}-updated`, id, action, data);
         });
         gantt.$_dataProcessorInitialized = true;
@@ -47,7 +47,7 @@ export default {
     createOwnerElement() {
       let gantt_cal_light = document.getElementsByClassName("gantt_cal_light")[0];
       if (gantt_cal_light) gantt_cal_light.style.height = "auto";
-      
+
       let gantt_cal_larea = document.getElementsByClassName("gantt_cal_larea")[0];
       if (gantt_cal_larea) gantt_cal_larea.style.height = "auto";
 
@@ -64,7 +64,7 @@ export default {
 
       if (list[0]) list[0].insertBefore(newItem, list[0].childNodes[2]);
 
-      var user = ["Jnson", "Mark", "Ponting", "lee"],
+      var user = ["Ai Fen", "Sean", "Jia Yi", "Jeremy"],
           selectEl = document.getElementById('selectElementId');
 
       for (var i = 0; i< user.length; i++) {
@@ -86,7 +86,7 @@ export default {
       }
     }
   },
-  mounted: function () { 
+  mounted: function () {
     this.$_initGanttEvents();
     gantt.config.xml_date = "%Y-%m-%d";
     gantt.config.autosize = "y";
@@ -96,7 +96,7 @@ export default {
   }
 }
 </script>
- 
+
 <style>
 @import "~dhtmlx-gantt/codebase/dhtmlxgantt.css";
 </style>
