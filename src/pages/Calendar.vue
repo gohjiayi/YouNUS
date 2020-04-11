@@ -1,4 +1,5 @@
 <template>
+<div>
   <v-app id="dayspan" v-cloak>
     <ds-calendar-app
       ref="app"
@@ -60,6 +61,8 @@
       </template> -->
     </ds-calendar-app>
   </v-app>
+</div>
+  
 </template>
 
 <script>
@@ -100,9 +103,9 @@ export default {
       return sa === ea ? sh + " - " + eh + ea : sh + sa + " - " + eh + ea;
     },
     async eventCreate() {
-      console.log("event", this.events.events);
+      // console.log("event", this.events.events);
       let state = this.calendar.toInput(true);
-      console.log("state", state);
+      // console.log("state", state);
       
       if (this.events && this.events.events && this.events.events.id ) {
         state.id = this.events.events.id;
@@ -158,44 +161,11 @@ export default {
       // let state = this.calendar.toInput(true);
       // let json = JSON.stringify(state);
       // localStorage.setItem(this.storeKey, json);
-      
-      // var parsedobj = JSON.parse(JSON.stringify(this.events))
-      
-      // if (parsedobj.events && parsedobj.events.id ) {
-      //   state.id = parsedobj.events.id;
-      
-      //   if (state.id) {
-      //     console.log("update");
-        
-      //     await this.UPDATE_EVENTS(state).then(res => {
-      //         this.getEventsData();
-      //         console.log("res", res);
-              
-      //       })
-      //       .catch(err => {
-      //         console.log(
-      //           `ERROR : VIEWS : DataViewSidebar.vue : submitData -> ADD NEW : ${err}`
-      //         );
-      //       });
-      //   }
-      // } else {
-      //   await this.ADD_EVENTS(state).then(res => {
-      //         this.getEventsData();
-      //         console.log("res", res); 
-      //     })
-      //     .catch(err => {
-      //       console.log(
-      //         `ERROR : VIEWS : DataViewSidebar.vue : submitData -> ADD NEW : ${err}`
-      //       );
-      //     });
-      // }
     },
     loadState() {
       let state = {};
-      try {
-        console.log("this.events.events", this.events.events);
-        
-        let savedState = this.events.events; //JSON.parse(localStorage.getItem(this.storeKey));
+      try {       
+        let savedState = this.events.events.id ? this.events.events : this.defaultEvents; //JSON.parse(localStorage.getItem(this.storeKey));
         if (savedState) {
           state = savedState;
           state.preferToday = false;
@@ -215,18 +185,18 @@ export default {
       }
       
       this.$refs.app.setState(state);
+      this.$refs.app.rebuild(undefined, true, this.$refs.app.currentType); // for data show events not show over each other
     },
     
     async getEventsData() {
-      let data =  await this.FETCH_EVENTS();
-      let json = JSON.stringify(data);
-      localStorage.setItem(this.storeKey, json);
+      await this.FETCH_EVENTS();
     }
   },
   async created() {
-    this.FETCH_EVENTS();
-    
-    this.defaultEvents = await this.getEventsData();
+    this.defaultEvents = await this.FETCH_EVENTS().then(e => {
+      this.loadState();
+      return e
+    });
   },
   mounted() {
     let navigationDrawer = document.getElementsByClassName(
