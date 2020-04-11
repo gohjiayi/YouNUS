@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <div>
     <button type="button" class="btn btn-primary ml-4" @click="openTaskModal()">Create New Task</button>
     <div class="container gantt-containet">
@@ -6,6 +7,13 @@
         @task-updated="logTaskUpdate" @link-updated="logLinkUpdate" 
         @taskSelected="selectTask()">
       </ganttComponent>
+=======
+  <div class="container gantt-containet">
+    <ganttComponent id="js-gantt-container" class="left-container" :tasks="tasks.data && tasks.data.length ? tasks : ganttData"
+      @task-updated="logTaskUpdate" @link-updated="logLinkUpdate"
+      @taskSelected="selectTask()">
+    </ganttComponent>
+>>>>>>> bb07246f75f6b70a75eaeb71f256095cf3a685ac
 
       <!-- <div class="download-containet">
         <button type="button" class="btn btn-danger download" @click="downloadProcess">Download</button>
@@ -13,11 +21,17 @@
     </div>
   </div>
 </template>
+<<<<<<< HEAD
+=======
+
+>>>>>>> bb07246f75f6b70a75eaeb71f256095cf3a685ac
 <script>
 
 import ganttComponent from "@/components/gantt";
 import { mapActions, mapGetters } from "vuex";
+// eslint-disable-next-line no-unused-vars
 import jsPDF from 'jspdf';
+// eslint-disable-next-line no-unused-vars
 import html2canvas from 'html2canvas';
 import GanttMixin from "@/mixins/GanttMixin.vue"
 
@@ -56,7 +70,7 @@ export default {
     addMessage (message) {
       console.log("message", message);
     },
- 
+
     async logTaskUpdate (id, mode, task) {
       if (mode === "create") {
         delete task.id
@@ -69,10 +83,10 @@ export default {
             `add : ${err}`
           );
         });
-        
+
       } else if (mode === "update") {
         console.log("task", task);
-        
+
         await this.UPDATE_TASK_GANTT(task).then(res => {
           console.log("res", res);
           this.FETCH_GANTTS();
@@ -84,7 +98,7 @@ export default {
         });
       }
     },
- 
+
     async logLinkUpdate (id, mode, link) {
       if (mode === "create") {
         delete link.id
@@ -120,7 +134,7 @@ export default {
 
       var list = document.getElementsByClassName("gantt_cal_larea");
       console.log("list", list);
-      
+
       if (list[0]) list[0].insertBefore(newItem, list[0].childNodes[2]);
     },
   },
@@ -181,6 +195,7 @@ export default {
     bottom: -5rem;
     right: 0;
   }
+<<<<<<< HEAD
 
   .owner-list {
     display: grid;
@@ -189,3 +204,6 @@ export default {
     padding-right: 10px;
   }
 </style>
+=======
+</style>
+>>>>>>> bb07246f75f6b70a75eaeb71f256095cf3a685ac
