@@ -1,7 +1,7 @@
 <template>
   <div class="container gantt-containet">
     <ganttComponent id="js-gantt-container" class="left-container" :tasks="tasks.data && tasks.data.length ? tasks : ganttData"
-      @task-updated="logTaskUpdate" @link-updated="logLinkUpdate" 
+      @task-updated="logTaskUpdate" @link-updated="logLinkUpdate"
       @taskSelected="selectTask()">
     </ganttComponent>
 
@@ -10,12 +10,14 @@
     </div>
   </div>
 </template>
- 
+
 <script>
 
 import ganttComponent from "@/components/gantt";
 import { mapActions, mapGetters } from "vuex";
+// eslint-disable-next-line no-unused-vars
 import jsPDF from 'jspdf';
+// eslint-disable-next-line no-unused-vars
 import html2canvas from 'html2canvas';
 
 export default {
@@ -51,7 +53,7 @@ export default {
     addMessage (message) {
       console.log("message", message);
     },
- 
+
     async logTaskUpdate (id, mode, task) {
       if (mode === "create") {
         delete task.id
@@ -64,10 +66,10 @@ export default {
             `add : ${err}`
           );
         });
-        
+
       } else if (mode === "update") {
         console.log("task", task);
-        
+
         await this.UPDATE_TASK_GANTT(task).then(res => {
           console.log("res", res);
           this.FETCH_GANTTS();
@@ -79,7 +81,7 @@ export default {
         });
       }
     },
- 
+
     async logLinkUpdate (id, mode, link) {
       if (mode === "create") {
         delete link.id
@@ -115,7 +117,7 @@ export default {
 
       var list = document.getElementsByClassName("gantt_cal_larea");
       console.log("list", list);
-      
+
       if (list[0]) list[0].insertBefore(newItem, list[0].childNodes[2]);
     },
   },
