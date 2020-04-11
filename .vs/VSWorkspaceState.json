@@ -2,9 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\src",
+    "\\src\\components",
     "\\src\\pages",
-    "\\src\\pages\\Layout"
+    "\\src\\pages\\Layout",
+    "\\src\\routes"
   ],
-  "SelectedNode": "\\src\\pages\\Layout",
+  "SelectedNode": "\\src\\components\\NavBar.vue",
   "PreviewInSolutionExplorer": false
 }
