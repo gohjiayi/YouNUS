@@ -103,18 +103,16 @@ export default {
       return sa === ea ? sh + " - " + eh + ea : sh + sa + " - " + eh + ea;
     },
     async eventCreate() {
-      // console.log("event", this.events.events);
       let state = this.calendar.toInput(true);
-      // console.log("state", state);
       
       if (this.events && this.events.events && this.events.events.id ) {
         state.id = this.events.events.id;
         
         if (state.id) {
           await this.UPDATE_EVENTS(state).then(res => {
+              this.$refs.app.setState(state);
               this.getEventsData();
               console.log("res", res);
-              
             })
             .catch(err => {
               console.log(
@@ -124,6 +122,7 @@ export default {
         }
       } else {
         await this.ADD_EVENTS(state).then(res => {
+              this.$refs.app.setState(state);
               this.getEventsData();
               console.log("res", res); 
           })
