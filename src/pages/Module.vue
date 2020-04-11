@@ -10,22 +10,22 @@
 </template>
 
 <script>
-    import Projects from "@/pages/Projects.vue"
-    export default {
-        components: {
-            Projects
-        },
-        props: {
-            module: {
-                type: Number,
-                default: 1
-            }
-        },
+import Projects from "@/pages/Projects.vue"
+export default {
+  components: {
+    Projects
+  },
+  props: {
+    module: {
+      type: Number,
+      default: 1
     }
+  },
+}
 </script>
 
 <style scoped>
-    .module{
+    .module {
         min-height: 100px;
     }
 </style>

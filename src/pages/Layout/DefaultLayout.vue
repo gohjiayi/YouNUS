@@ -6,12 +6,14 @@
 </template>
 
 <script>
-    import AppHeader from "@/components/Header"
-    export default {
-        components:{
-            AppHeader
-        }
-    }
+import AppHeader from "@/components/Header"
+
+export default {
+  components:{
+    AppHeader
+  }
+};
+
 </script>
 
 <style>

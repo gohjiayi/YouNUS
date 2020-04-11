@@ -7,12 +7,12 @@
 </template>
 
 <script>
-    import Module from "@/pages/Module.vue"
-    export default {
-        components:{
-            Module
-        },
-    }
+import Module from "@/pages/Module.vue"
+export default {
+  components:{
+    Module
+  },
+}
 </script>
 
 <style>
