@@ -1,4 +1,5 @@
 <template>
+<div>
   <v-app id="dayspan" v-cloak>
     <ds-calendar-app
       ref="app"
@@ -60,25 +61,30 @@
       </template> -->
     </ds-calendar-app>
   </v-app>
+</div>
+  
 </template>
 
 <script>
-import { Calendar } from 'dayspan';
+import { Calendar } from "dayspan";
 import Vue from "vue";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "app",
   data: () => ({
-    storeKey: "dayspanState",
+    storeKey: "dayspanStates",
     calendar: Calendar.months(),
     readOnly: false,
-    defaultEvents: {}
+    defaultEvents: {},
+    demo: {}
   }),
   computed: {
     ...mapGetters("events", ["events"]),
     events() {
-      return this.$store.state.events;
+      let data = this.$store.state.events;
+      console.log("data 82", data);
+      return data;
     }
   },
   methods: {
@@ -96,9 +102,39 @@ export default {
       }
       return sa === ea ? sh + " - " + eh + ea : sh + sa + " - " + eh + ea;
     },
-    eventCreate(event) {
-      console.log("event", event);
+    async eventCreate() {
+      let state = this.calendar.toInput(true);
+      
+      if (this.events && this.events.events && this.events.events.id ) {
+        state.id = this.events.events.id;
+        
+        if (state.id) {
+          await this.UPDATE_EVENTS(state).then(res => {
+              this.$refs.app.setState(state);
+              this.getEventsData();
+              console.log("res", res);
+            })
+            .catch(err => {
+              console.log(
+                `ERROR : VIEWS : DataViewSidebar.vue : submitData -> ADD NEW : ${err}`
+              );
+            });
+        }
+      } else {
+        await this.ADD_EVENTS(state).then(res => {
+              this.$refs.app.setState(state);
+              this.getEventsData();
+              console.log("res", res); 
+          })
+          .catch(err => {
+            console.log(
+              `ERROR : VIEWS : DataViewSidebar.vue : submitData -> ADD NEW : ${err}`
+            );
+          });
+      }
+      
       // let sch = event.schedule || null;
+      
       // let schedule = {
       //   times: sch && sch.times ? sch.times : [],
       //   duration: sch && sch.duration ? sch.duration : '',
@@ -110,51 +146,25 @@ export default {
       //   month: ,
       //   dayOfMonth
       // }
+      
       // let data = {
       //   data: event.data,
       //   schedule: ""
       // }
+      
       // let state = this.calendar.toInput(true);
+      
+      // console.log("data", state);
     },
     async saveState() {
-      let state = this.calendar.toInput(true);
-      let json = JSON.stringify(state);
-      localStorage.setItem(this.storeKey, json);
-
-      console.log("this.events.events", this.events.events);
-
-            
-      
-      if (this.events && this.events.events && this.events.events.id) {
-        state.id = this.events.events.id;
-        if (state.id) {
-          await this.UPDATE_EVENTS(state).then(res => {
-              this.getEventsData();
-              console.log("res", res);
-              
-            })
-            .catch(err => {
-              console.log(
-                `ERROR : VIEWS : DataViewSidebar.vue : submitData -> ADD NEW : ${err}`
-              );
-            });
-        }
-      } else {
-        await this.ADD_EVENTS(state).then(res => {
-              this.getEventsData();
-              console.log("res", res); 
-          })
-          .catch(err => {
-            console.log(
-              `ERROR : VIEWS : DataViewSidebar.vue : submitData -> ADD NEW : ${err}`
-            );
-          });
-      }
+      // let state = this.calendar.toInput(true);
+      // let json = JSON.stringify(state);
+      // localStorage.setItem(this.storeKey, json);
     },
     loadState() {
       let state = {};
-      try {
-        let savedState = JSON.parse(localStorage.getItem(this.storeKey));
+      try {       
+        let savedState = this.events.events.id ? this.events.events : this.defaultEvents; //JSON.parse(localStorage.getItem(this.storeKey));
         if (savedState) {
           state = savedState;
           state.preferToday = false;
@@ -172,23 +182,27 @@ export default {
           ev.data = Vue.util.extend(defaults, ev.data);
         });
       }
+      
       this.$refs.app.setState(state);
+      this.$refs.app.rebuild(undefined, true, this.$refs.app.currentType); // for data show events not show over each other
     },
+    
     async getEventsData() {
-      let data =  await this.FETCH_EVENTS();
-      let json = JSON.stringify(data);
-      localStorage.setItem(this.storeKey, json);
+      await this.FETCH_EVENTS();
     }
   },
   async created() {
-    this.FETCH_EVENTS();
-    this.defaultEvents = await this.getEventsData();
+    this.defaultEvents = await this.FETCH_EVENTS().then(e => {
+      this.loadState();
+      return e
+    });
   },
   mounted() {
     let navigationDrawer = document.getElementsByClassName(
       "v-navigation-drawer"
     )[0];
     if (navigationDrawer) navigationDrawer.style.marginLeft = "19%";
+    
     let calendarTopBar = document.getElementsByClassName(
       "ds-app-calendar-toolbar"
     )[0];
@@ -196,7 +210,9 @@ export default {
       calendarTopBar.style.marginLeft = "19%";
       calendarTopBar.style.width = "81%";
     }
+    
     window.app = this.$refs.app;
+    
     this.loadState();
   }
 };
@@ -208,11 +224,11 @@ export default {
   background-color: #f5f5f5 !important;
   margin-bottom: 8px !important;
 }
+
 .v-menu__activator {
   align-items: center;
   cursor: pointer;
   display: flex;
   position: relative;
 }
-
 </style>
