@@ -1,22 +1,25 @@
 <template>
-  <div class="container gantt-containet">
-    <ganttComponent id="js-gantt-container" class="left-container" :tasks="tasks.data && tasks.data.length ? tasks : ganttData"
-      @task-updated="logTaskUpdate" @link-updated="logLinkUpdate" 
-      @taskSelected="selectTask()">
-    </ganttComponent>
+  <div>
+    <button type="button" class="btn btn-primary ml-4" @click="openTaskModal()">Create New Task</button>
+    <div class="container gantt-containet">
+      <ganttComponent ref="ganttComponent" id="js-gantt-container" class="left-container" :tasks="tasks.data && tasks.data.length ? tasks : ganttData"
+        @task-updated="logTaskUpdate" @link-updated="logLinkUpdate" 
+        @taskSelected="selectTask()">
+      </ganttComponent>
 
-    <div class="download-containet">
-      <button type="button" class="btn btn-danger download" @click="downloadProcess">Download</button>
+      <!-- <div class="download-containet">
+        <button type="button" class="btn btn-danger download" @click="downloadProcess">Download</button>
+      </div> -->
     </div>
   </div>
 </template>
- 
 <script>
 
 import ganttComponent from "@/components/gantt";
 import { mapActions, mapGetters } from "vuex";
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import GanttMixin from "@/mixins/GanttMixin.vue"
 
 export default {
   name: 'gantt',
@@ -26,9 +29,11 @@ export default {
       messages: [],
       ganttData: {
         data: [], links: []
-      }
+      },
+      projectId: "",
     }
   },
+  mixins:[GanttMixin],
   computed: {
     ...mapGetters("gantt", ["gantt"]),
     tasks() {
