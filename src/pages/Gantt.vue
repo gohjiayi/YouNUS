@@ -128,7 +128,7 @@ export default {
   }
 }
 </script>
- 
+
 <style>
   .container {
     height: 100%;
@@ -157,6 +157,15 @@ export default {
     overflow-y: auto;
     padding-left: 5px;
   }
+  .gantt-messages > .gantt-message {
+    background-color: #f4f4f4;
+    box-shadow:inset 5px 0 #d69000;
+    font-family: Geneva, Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    margin: 5px 0;
+    padding: 8px 0 8px 10px;
+  }
+
   .gantt-containet {
     position: relative;
     margin-bottom: 5rem;
@@ -166,5 +175,12 @@ export default {
     position: absolute;
     bottom: -5rem;
     right: 0;
+  }
+
+  .owner-list {
+    display: grid;
+    padding-left: 10px;
+    margin-top: 10px;
+    padding-right: 10px;
   }
 </style>
