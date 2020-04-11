@@ -130,7 +130,43 @@ export default {
   }
 }
 </script>
+ 
+<style>
+  .container {
+    height: 100%;
+    width: 100%;
+  }
+  .left-container {
+    overflow: hidden;
+    position: relative;
+    height: 100%;
+    width: 100%;
+  }
+  .right-container {
+    border-right: 1px solid #cecece;
+    float: right;
+    height: 100%;
+    width: 340px;
+    box-shadow: 0 0 5px 2px #aaa;
+    position: relative;
+    z-index:2;
+  }
+  .gantt-messages {
+    list-style-type: none;
+    height: 50%;
+    margin: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-left: 5px;
+  }
+  .gantt-containet {
+    position: relative;
+    margin-bottom: 5rem;
+  }
 
-<style scoped>
-@import "~dhtmlx-gantt/codebase/dhtmlxgantt.css";
+  .download-containet {
+    position: absolute;
+    bottom: -5rem;
+    right: 0;
+  }
 </style>

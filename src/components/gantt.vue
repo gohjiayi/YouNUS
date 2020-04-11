@@ -63,6 +63,8 @@ export default {
       var list = document.getElementsByClassName("gantt_cal_larea");
 
       if (list[0]) list[0].insertBefore(newItem, list[0].childNodes[2]);
+      var user = ["Jnson", "Mark", "Ponting", "lee"],
+          selectEl = document.getElementById('selectElementId');
 
       var user = ["Ai Fen", "Sean", "Jia Yi", "Jeremy"],
           selectEl = document.getElementById('selectElementId');
@@ -75,6 +77,8 @@ export default {
       }
     },
     changeEvents() {
+      // var el = $('[task_id="k7iXeGO3hHJ6aZ5d73X2"]');
+      console.log("hello");
     }
   },
   watch: {
@@ -83,6 +87,14 @@ export default {
         this.tasks.data = newValue.data,
         this.tasks.links = newValue.links;
         gantt.parse(this.$props.tasks);
+
+        newValue.data.forEach(e => {
+          if (e.type === "urgent") {
+            let el = $(`[task_id=${e.id}]`)[2];
+           
+           if (el) el.classList.add("gantt_task_line_urgent");
+          }
+        });
       }
     }
   },
