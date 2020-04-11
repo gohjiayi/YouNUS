@@ -4,9 +4,8 @@
     "\\src",
     "\\src\\components",
     "\\src\\pages",
-    "\\src\\pages\\Layout",
-    "\\src\\routes"
+    "\\src\\pages\\Layout"
   ],
-  "SelectedNode": "\\src\\components\\NavBar.vue",
+  "SelectedNode": "\\src\\pages\\Projects.vue",
   "PreviewInSolutionExplorer": false
 }
