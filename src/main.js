@@ -1,13 +1,9 @@
 import Vue from "vue";
-
 import App from "./App.vue";
 import store from "./store/store.js";
-
 import Vuex from 'vuex'
-import VueRouter from "vue-router";
 import Vuetify from 'vuetify'
 import DaySpanVuetify from 'dayspan-vuetify'
-import App from "./App";
 import VueToast from 'vue-toast-notification';
 
 // router setup
@@ -29,8 +25,6 @@ import Chartist from "chartist";
 import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
-
-
 import 'vuetify/dist/vuetify.min.css';
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
 import 'dayspan-vuetify/dist/lib/dayspan-vuetify.min.css';
@@ -72,12 +66,12 @@ Vue.use(Notifications);
 // Login
 firebase.auth().onAuthStateChanged(user => {
     store.dispatch("fetchUser", user);
+});
 
 Vue.use(DaySpanVuetify, {
   methods: {
     getDefaultEventColor: () => '#1976d2'
   }
-
 });
 
 // firebase.initializeApp({
