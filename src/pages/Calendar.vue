@@ -201,14 +201,19 @@ export default {
     let navigationDrawer = document.getElementsByClassName(
       "v-navigation-drawer"
     )[0];
-    if (navigationDrawer) navigationDrawer.style.marginLeft = "19%";
+    if (navigationDrawer) {
+      navigationDrawer.style.marginLeft = "19.4%";
+      navigationDrawer.style.marginTop = "10%";
+    }
     
     let calendarTopBar = document.getElementsByClassName(
       "ds-app-calendar-toolbar"
     )[0];
     if (calendarTopBar) {
-      calendarTopBar.style.marginLeft = "19%";
-      calendarTopBar.style.width = "81%";
+      calendarTopBar.classList.remove("v-toolbar--fixed");
+      // calendarTopBar.style.marginLeft = "19.4%";
+      // calendarTopBar.style.width = "81%";
+      // calendarTopBar.style.marginTop = "5%";
     }
     
     window.app = this.$refs.app;
@@ -230,5 +235,9 @@ export default {
   cursor: pointer;
   display: flex;
   position: relative;
+}
+
+.ds-app-calendar-toolbar {
+
 }
 </style>
