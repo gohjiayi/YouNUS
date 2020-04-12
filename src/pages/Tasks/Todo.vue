@@ -2,10 +2,10 @@
   <div class='ui centered card'>
     <div class="content" v-show="!isEditing">
       <div class='header'>
-          {{ todo.title }}
+        {{ todo.title }}
       </div>
       <div class='meta'>
-          {{ todo.project }}
+        {{ todo.project }}
       </div>
       <div class='extra content'>
           <span class='right floated edit icon' v-on:click="showForm">
@@ -34,10 +34,10 @@
       </div>
     </div>
     <div class='ui bottom attached green basic button' v-show="!isEditing &&todo.done" disabled>
-        Completed
+      Completed
     </div>
     <div class='ui bottom attached red basic button' v-on:click="completeTodo(todo)" v-show="!isEditing && !todo.done">
-        Pending
+      Pending
     </div>
   </div>
 </template>
