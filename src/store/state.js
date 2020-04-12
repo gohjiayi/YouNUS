@@ -1,5 +1,3 @@
-// import { Weekday, Month } from "dayspan";
-
 const state = {
   events: [],
   gantt: {
@@ -15,3 +13,4 @@ const state = {
 };
 
 export default state
+

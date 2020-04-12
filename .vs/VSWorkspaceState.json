@@ -2,9 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\src",
+    "\\src\\components",
     "\\src\\pages",
     "\\src\\pages\\Layout"
   ],
-  "SelectedNode": "\\src\\pages\\Layout",
+  "SelectedNode": "\\src\\pages\\Projects.vue",
   "PreviewInSolutionExplorer": false
 }
