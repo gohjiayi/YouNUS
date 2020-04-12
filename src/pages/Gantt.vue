@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
   <div>
     <button type="button" class="btn btn-primary ml-4" @click="openTaskModal()">Create New Task</button>
     <div class="container gantt-containet">
@@ -7,13 +6,6 @@
         @task-updated="logTaskUpdate" @link-updated="logLinkUpdate" 
         @taskSelected="selectTask()">
       </ganttComponent>
-=======
-  <div class="container gantt-containet">
-    <ganttComponent id="js-gantt-container" class="left-container" :tasks="tasks.data && tasks.data.length ? tasks : ganttData"
-      @task-updated="logTaskUpdate" @link-updated="logLinkUpdate"
-      @taskSelected="selectTask()">
-    </ganttComponent>
->>>>>>> bb07246f75f6b70a75eaeb71f256095cf3a685ac
 
       <!-- <div class="download-containet">
         <button type="button" class="btn btn-danger download" @click="downloadProcess">Download</button>
@@ -21,17 +13,11 @@
     </div>
   </div>
 </template>
-<<<<<<< HEAD
-=======
-
->>>>>>> bb07246f75f6b70a75eaeb71f256095cf3a685ac
 <script>
 
 import ganttComponent from "@/components/gantt";
 import { mapActions, mapGetters } from "vuex";
-// eslint-disable-next-line no-unused-vars
 import jsPDF from 'jspdf';
-// eslint-disable-next-line no-unused-vars
 import html2canvas from 'html2canvas';
 import GanttMixin from "@/mixins/GanttMixin.vue"
 
@@ -66,45 +52,57 @@ export default {
     }
   },
   methods: {
-    ...mapActions("gantt",["FETCH_GANTTS", "ADD_TASK_GANTT", "UPDATE_TASK_GANTT", "ADD_TASK_LINK", "UPDATE_TASK_LINK"]), //, ["FETCH_EVENTS", "ADD_EVENTS", "UPDATE_EVENTS"]
+    ...mapActions("gantt",["FETCH_GANTTS", "ADD_TASK_GANTT", "UPDATE_TASK_GANTT", "DELETE_TASK_GANTT", "ADD_TASK_LINK", "UPDATE_TASK_LINK", "DELETE_TASK_LINK"]),
     addMessage (message) {
       console.log("message", message);
     },
-
+ 
     async logTaskUpdate (id, mode, task) {
+      let ele = document.getElementById("selectElementId");
+
       if (mode === "create") {
-        delete task.id
+        delete task.id;
+        task.owner = ele && ele.value ? ele.value : '';
+        task.projectId = this.projectId;
+
         await this.ADD_TASK_GANTT(task).then(res => {
             console.log("res", res);
-            this.FETCH_GANTTS();
+            this.FETCH_GANTTS({projectId: this.projectId});
         })
         .catch(err => {
           console.log(
             `add : ${err}`
           );
         });
-
+        
       } else if (mode === "update") {
-        console.log("task", task);
+        task.owner = ele && ele.value ? ele.value : '';
+        task.projectId = this.projectId;
 
         await this.UPDATE_TASK_GANTT(task).then(res => {
           console.log("res", res);
-          this.FETCH_GANTTS();
+          this.FETCH_GANTTS({projectId: this.projectId});
         })
         .catch(err => {
           console.log(
             `update : ${err}`
           );
         });
+      } else if (mode === "delete") {
+        await this.DELETE_TASK_GANTT({id: task.id}).then(res => {
+          console.log(res);            
+          this.FETCH_GANTTS({projectId: this.projectId});
+        })
       }
     },
-
+ 
     async logLinkUpdate (id, mode, link) {
       if (mode === "create") {
-        delete link.id
+        delete link.id;
+        link.projectId = this.projectId;
         await this.ADD_TASK_LINK(link).then(res => {
             console.log("res", res);
-            this.FETCH_GANTTS();
+            this.FETCH_GANTTS({projectId: this.projectId});
         })
         .catch(err => {
           console.log(
@@ -112,38 +110,65 @@ export default {
           );
         });
       } else if (mode === "update") {
+        link.projectId = this.projectId;
         await this.UPDATE_TASK_LINK(link).then(res => {
           console.log("res", res);
-          this.FETCH_GANTTS();
+          this.FETCH_GANTTS({projectId: this.projectId});
         })
         .catch(err => {
           console.log(
             `update : ${err}`
           );
         });
+      } else if (mode === "delete") {
+        await this.DELETE_TASK_LINK({id: link.id}).then(res => {
+          console.log(res);            
+          this.FETCH_GANTTS({projectId: this.projectId});
+        })
       }
     },
 
     selectTask: function(task){
       console.log("task 134", task);
     },
-    createOwnerElement() {
-      let newItem = document.createElement("div");
-      let textnode = document.createTextNode("Water");
-      newItem.appendChild(textnode);
+    downloadProcess() {
+      setTimeout(function () {
+        html2canvas(document.querySelector("#js-gantt-container")).then(canvas => {
+            //$("#previewBeforeDownload").html(canvas);
+            var imgData = canvas.toDataURL("image/jpeg",1);
+            var pdf = new jsPDF("p", "mm", "a3");
+            var pageWidth = pdf.internal.pageSize.getWidth();
+            var pageHeight = pdf.internal.pageSize.getHeight();
+            var imageWidth = canvas.width;
+            var imageHeight = canvas.height;
 
-      var list = document.getElementsByClassName("gantt_cal_larea");
-      console.log("list", list);
-
-      if (list[0]) list[0].insertBefore(newItem, list[0].childNodes[2]);
+            var ratio = imageWidth/imageHeight >= pageWidth/pageHeight ? pageWidth/imageWidth : pageHeight/imageHeight;
+            //pdf = new jsPDF(this.state.orientation, undefined, format);
+            pdf.addImage(imgData, 'JPEG', 0, 0, imageWidth * ratio, imageHeight * ratio);
+            pdf.save("gantt-chart.pdf");
+        });
+      },500);
     },
+    openTaskModal() {
+      let _this = this
+      let element = document.getElementsByClassName("gantt_grid_head_add")[0];
+      if (element){
+        element.click();
+        setTimeout(() => {
+          _this.createOwnerElement();
+        },10)
+      }
+    }
   },
 
   created() {
+    let obj = JSON.parse(localStorage.getItem('vuex'));
+    this.projectId = obj && obj.project && obj.project.selectedProject && obj.project.selectedProject.id ? obj.project.selectedProject.id : "";
+    if (!this.projectId) this.$router.replace(`/home`);
     // this.FETCH_GANTTS();
   },
   async mounted() {
-    this.ganttData = await this.FETCH_GANTTS();
+    this.ganttData = await this.FETCH_GANTTS({projectId: this.projectId});
   }
 }
 </script>
@@ -195,7 +220,6 @@ export default {
     bottom: -5rem;
     right: 0;
   }
-<<<<<<< HEAD
 
   .owner-list {
     display: grid;
@@ -204,6 +228,3 @@ export default {
     padding-right: 10px;
   }
 </style>
-=======
-</style>
->>>>>>> bb07246f75f6b70a75eaeb71f256095cf3a685ac
