@@ -6,7 +6,8 @@ import state from "./state";
 
 import tasks from "./tasks";
 import events from "./events";
-
+import stickyNotes from "./sticky-note";
+import notes from "./notes";
 
 Vue.use(Vuex)
 
@@ -15,7 +16,8 @@ export default new Vuex.Store({
     state,
     modules: {
         events,
-        tasks
-
+        tasks,
+        stickyNotes,
+        notes
     }
 })
