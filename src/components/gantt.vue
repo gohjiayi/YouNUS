@@ -1,10 +1,14 @@
 <template>
-  <div ref="gantt"></div>
+  <div ref="gantt"></div> 
 </template>
-
+ 
 <script>
+import moment from "moment"
 import {gantt} from 'dhtmlx-gantt';
-// import $ from 'jquery'
+import 'dhtmlx-gantt/codebase/ext/dhtmlxgantt_marker.js';
+import "dhtmlx-gantt/codebase/dhtmlxgantt.css"
+import $ from 'jquery'
+import GanttMixin from "@/mixins/GanttMixin.vue"
 export default {
   props: {
     tasks: {
@@ -14,15 +18,19 @@ export default {
       }
     }
   },
+  mixins:[GanttMixin],
+  watch: {
+    tasks(val) {
+      console.log("val", val);
+      
+    }
+  },
  methods: {
     $_initGanttEvents: function() {
+      let _this = this
       if (!gantt.$_eventsInitialized) {
         gantt.attachEvent('onTaskSelected', (id) => {
           let task = gantt.getTask(id);
-          setTimeout(() => {
-            this.createOwnerElement();
-          })
-
           this.$emit('taskSelected', task);
         });
         gantt.attachEvent('onTaskIdChange', (id, new_id) => {
@@ -31,6 +39,17 @@ export default {
             this.$emit('taskSelected', task);
           }
         });
+        gantt.attachEvent("onTaskDblClick", function(id, e) {
+          let task = gantt.getTask(id);
+            setTimeout(() => {
+              _this.createOwnerElement();
+            },10)
+            setTimeout(()=>{
+              _this.setOwner(task);
+            },100)
+          _this.$emit('taskSelected', task);
+          gantt.showLightbox(id);
+        });
         gantt.$_eventsInitialized = true;
       }
     },
@@ -38,47 +57,23 @@ export default {
       // if (!gantt.$_dataProcessorInitialized) {
         gantt.createDataProcessor((entity, action, data, id) => {
           console.log("entity", entity);
-
+          
           this.$emit(`${entity}-updated`, id, action, data);
         });
         gantt.$_dataProcessorInitialized = true;
       // }
     },
-    createOwnerElement() {
-      let gantt_cal_light = document.getElementsByClassName("gantt_cal_light")[0];
-      if (gantt_cal_light) gantt_cal_light.style.height = "auto";
-
-      let gantt_cal_larea = document.getElementsByClassName("gantt_cal_larea")[0];
-      if (gantt_cal_larea) gantt_cal_larea.style.height = "auto";
-
-      let newItem = document.createElement("div");
-      newItem.className = "owner-list";
-      let textnode = document.createTextNode("Owner");
-      newItem.appendChild(textnode);
-
-      let select = document.createElement("SELECT");
-      select.id = "selectElementId";
-      newItem.appendChild(select);
-
-      var list = document.getElementsByClassName("gantt_cal_larea");
-
-      if (list[0]) list[0].insertBefore(newItem, list[0].childNodes[2]);
-      var user = ["Jnson", "Mark", "Ponting", "lee"],
-          selectEl = document.getElementById('selectElementId');
-
-      var user = ["Ai Fen", "Sean", "Jia Yi", "Jeremy"],
-          selectEl = document.getElementById('selectElementId');
-
-      for (var i = 0; i< user.length; i++) {
-          var opt = document.createElement('option');
-          opt.value = user[i];
-          opt.innerHTML = user[i];
-          if (selectEl) selectEl.appendChild(opt);
-      }
-    },
     changeEvents() {
       // var el = $('[task_id="k7iXeGO3hHJ6aZ5d73X2"]');
       console.log("hello");
+    },
+    setOwner(task) {
+      console.log("OWNER",task);
+      if (task && task.owner) {
+        let selectEl = document.getElementById('selectElementId');
+        console.log("SELE",selectEl);
+        if (selectEl) selectEl.value = task.owner;
+      }
     }
   },
   watch: {
@@ -98,17 +93,30 @@ export default {
       }
     }
   },
-  mounted: function () {
+  mounted: function () { 
     this.$_initGanttEvents();
     gantt.config.xml_date = "%Y-%m-%d";
     gantt.config.autosize = "y";
-    gantt.init(this.$refs.gantt);
+    gantt.config.start_date = new Date();
+    gantt.config.show_tasks_outside_timescale = true;
+    gantt.init(this.$refs.gantt, new Date(moment().subtract(60,"days")),new Date(moment().add(60,"days")));
     gantt.parse(this.$props.tasks);
+    var dateToStr = gantt.date.date_to_str(gantt.config.task_date);
+    gantt.addMarker({
+      start_date: new Date(), //a Date object that sets the marker's date
+      css: "today", //a CSS class applied to the marker
+      text: "Today", //the marker title
+      title: dateToStr( new Date()) // the marker's tooltip
+    });
     this.$_initDataProcessor();
   }
 }
 </script>
-
+ 
 <style>
 @import "~dhtmlx-gantt/codebase/dhtmlxgantt.css";
+
+.gantt_task_line_urgent {
+  background: red;
+}
 </style>
