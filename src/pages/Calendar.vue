@@ -83,7 +83,7 @@ export default {
     ...mapGetters("events", ["events"]),
     events() {
       let data = this.$store.state.events;
-      console.log("data 82", data);
+      // console.log("data 82", data);
       return data;
     }
   },
