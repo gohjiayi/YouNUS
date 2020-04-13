@@ -77,15 +77,17 @@ export default {
     calendar: Calendar.months(),
     readOnly: false,
     defaultEvents: {},
-    demo: {}
+    demo: {},
+    projectId: "",
+    events: {}
   }),
   computed: {
-    ...mapGetters("events", ["events"]),
-    events() {
-      let data = this.$store.state.events;
-      // console.log("data 82", data);
-      return data;
-    }
+    // ...mapGetters("events", ["events"]),
+    // events() {
+    //   let data = this.$store.state.events;
+    //   console.log("data 82", data);
+    //   return data;
+    // }
   },
   methods: {
     ...mapActions("events", ["FETCH_EVENTS", "ADD_EVENTS", "UPDATE_EVENTS"]),
@@ -104,15 +106,15 @@ export default {
     },
     async eventCreate() {
       let state = this.calendar.toInput(true);
+      state.projectId = this.projectId;
       
-      if (this.events && this.events.events && this.events.events.id ) {
-        state.id = this.events.events.id;
+      if (this.events && this.events.id ) {
+        state.id = this.events.id;
         
         if (state.id) {
           await this.UPDATE_EVENTS(state).then(res => {
               this.$refs.app.setState(state);
               this.getEventsData();
-              console.log("res", res);
             })
             .catch(err => {
               console.log(
@@ -124,7 +126,6 @@ export default {
         await this.ADD_EVENTS(state).then(res => {
               this.$refs.app.setState(state);
               this.getEventsData();
-              console.log("res", res); 
           })
           .catch(err => {
             console.log(
@@ -132,29 +133,6 @@ export default {
             );
           });
       }
-      
-      // let sch = event.schedule || null;
-      
-      // let schedule = {
-      //   times: sch && sch.times ? sch.times : [],
-      //   duration: sch && sch.duration ? sch.duration : '',
-      //   durationUnit: sch && sch.durationUnit ? sch.durationUnit : "",
-      //   dayOfWeek: sch && sch.dayOfWeek() ? sch.dayOfWeek().input : [],
-      //   weekspanOfMonth: ,
-      //   lastDayOfMonth: ,
-      //   lastWeekspanOfMonth: ,
-      //   month: ,
-      //   dayOfMonth
-      // }
-      
-      // let data = {
-      //   data: event.data,
-      //   schedule: ""
-      // }
-      
-      // let state = this.calendar.toInput(true);
-      
-      // console.log("data", state);
     },
     async saveState() {
       // let state = this.calendar.toInput(true);
@@ -164,7 +142,7 @@ export default {
     loadState() {
       let state = {};
       try {       
-        let savedState = this.events.events.id ? this.events.events : this.defaultEvents; //JSON.parse(localStorage.getItem(this.storeKey));
+        let savedState = this.events; //JSON.parse(localStorage.getItem(this.storeKey));
         if (savedState) {
           state = savedState;
           state.preferToday = false;
@@ -188,35 +166,22 @@ export default {
     },
     
     async getEventsData() {
-      await this.FETCH_EVENTS();
+      await this.FETCH_EVENTS({projectId: this.projectId}).then(events => {
+        console.log("events", events);
+        this.events = events;
+        if (this.events) {
+          this.loadState();
+        }
+      });
     }
   },
-  async created() {
-    this.defaultEvents = await this.FETCH_EVENTS().then(e => {
-      this.loadState();
-      return e
-    });
+  created() {
+    let obj = JSON.parse(localStorage.getItem('vuex'));
+    this.projectId = obj && obj.project && obj.project.selectedProject && obj.project.selectedProject.id ? obj.project.selectedProject.id : "";
+    
+    this.getEventsData() 
   },
-  mounted() {
-    // let navigationDrawer = document.getElementsByClassName(
-    //   "v-navigation-drawer"
-    // )[0];
-    // if (navigationDrawer) {
-    //   navigationDrawer.style.marginLeft = "19.4%";
-    //   navigationDrawer.style.marginTop = "10%";
-    // }
-    
-    // let calendarTopBar = document.getElementsByClassName(
-    //   "ds-app-calendar-toolbar"
-    // )[0];
-    // if (calendarTopBar) {
-    //   calendarTopBar.classList.remove("v-toolbar--fixed");
-    // }
-    
-    // window.app = this.$refs.app;
-    
-    this.loadState();
-  }
+  mounted() {}
 };
 </script>
 
@@ -247,3 +212,31 @@ div.v-input.v-text-field.v-text-field--single-line.v-text-field--solo.v-text-fie
   /* display: none !important; */
 }
 </style>
+
+<!--
+137 line
+      
+let sch = event.schedule || null;
+
+let schedule = {
+  times: sch && sch.times ? sch.times : [],
+  duration: sch && sch.duration ? sch.duration : '',
+  durationUnit: sch && sch.durationUnit ? sch.durationUnit : "",
+  dayOfWeek: sch && sch.dayOfWeek() ? sch.dayOfWeek().input : [],
+  weekspanOfMonth: ,
+  lastDayOfMonth: ,
+  lastWeekspanOfMonth: ,
+  month: ,
+  dayOfMonth
+}
+
+let data = {
+  data: event.data,
+  schedule: ""
+}
+
+let state = this.calendar.toInput(true);
+
+console.log("data", state);
+
+--->
