@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="pa-2">
   <v-app id="dayspan" v-cloak>
     <ds-calendar-app
       ref="app"
@@ -198,25 +198,22 @@ export default {
     });
   },
   mounted() {
-    let navigationDrawer = document.getElementsByClassName(
-      "v-navigation-drawer"
-    )[0];
-    if (navigationDrawer) {
-      navigationDrawer.style.marginLeft = "19.4%";
-      navigationDrawer.style.marginTop = "10%";
-    }
+    // let navigationDrawer = document.getElementsByClassName(
+    //   "v-navigation-drawer"
+    // )[0];
+    // if (navigationDrawer) {
+    //   navigationDrawer.style.marginLeft = "19.4%";
+    //   navigationDrawer.style.marginTop = "10%";
+    // }
     
-    let calendarTopBar = document.getElementsByClassName(
-      "ds-app-calendar-toolbar"
-    )[0];
-    if (calendarTopBar) {
-      calendarTopBar.classList.remove("v-toolbar--fixed");
-      // calendarTopBar.style.marginLeft = "19.4%";
-      // calendarTopBar.style.width = "81%";
-      // calendarTopBar.style.marginTop = "5%";
-    }
+    // let calendarTopBar = document.getElementsByClassName(
+    //   "ds-app-calendar-toolbar"
+    // )[0];
+    // if (calendarTopBar) {
+    //   calendarTopBar.classList.remove("v-toolbar--fixed");
+    // }
     
-    window.app = this.$refs.app;
+    // window.app = this.$refs.app;
     
     this.loadState();
   }
@@ -239,5 +236,14 @@ export default {
 
 .ds-app-calendar-toolbar {
 
+}
+.v-content.ds-expand{
+  padding: 0 !important;
+}
+aside.v-navigation-drawer.v-navigation-drawer--clipped.v-navigation-drawer--fixed.v-navigation-drawer--open.theme--light{
+  display: none !important;
+}
+div.v-input.v-text-field.v-text-field--single-line.v-text-field--solo.v-text-field--solo-flat.v-text-field--enclosed.v-input--hide-details.theme--light:nth-child(3){
+  /* display: none !important; */
 }
 </style>
