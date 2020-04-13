@@ -179,6 +179,7 @@ export default {
     let obj = JSON.parse(localStorage.getItem('vuex'));
     this.projectId = obj && obj.project && obj.project.selectedProject && obj.project.selectedProject.id ? obj.project.selectedProject.id : "";
     
+    if (!this.projectId) this.$router.replace(`/home`)
     this.getEventsData() 
   },
   mounted() {}
