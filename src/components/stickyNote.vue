@@ -30,6 +30,142 @@
     </div>
 </template>
 
+<script>
+    import { mapActions, mapGetters } from "vuex";
+    import vue2Dropzone from 'vue2-dropzone';
+    import 'vue2-dropzone/dist/vue2Dropzone.min.css';
+
+  export default {
+    components: {
+        // Upload
+        vueDropzone: vue2Dropzone
+    },
+    data() {
+        return {
+            dropzoneOptions: {
+                url: 'https://httpbin.org/post',
+                maxFilesize: 2,
+                headers: { "My-Awesome-Header": "header value" },
+                thumbnailWidth: 150, // px
+                thumbnailHeight: "auto",
+                addRemoveLinks: true,
+                chunking: true,
+            },
+            getFileType(type){
+                let ext = type.slice(type.lastIndexOf('/'));
+                return ext.substr(1);
+            },
+            sizeofFile(bytes, decimals = 2) {
+                if (bytes === 0) return '0 Bytes';
+
+                const k = 1024;
+                const dm = decimals < 0 ? 0 : decimals;
+                const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+            },
+            selectedFileId: "",
+            modalShow: false,
+            projectId: ""
+        };
+    },
+    computed: {
+        ...mapGetters("stickyNotes", ["stickyNotes"]),
+        stickNotes() {
+            let data = this.$store.state.stickyNotes.stickyNotes;
+            return data;
+        }
+    },
+    methods: {
+        ...mapActions("stickyNotes",["FETCH_STICKY_NOTES", "UPLOAD_STICKY_NOTES", "DELETE_STICKY_NOTES"]),
+        afterComplete(file) {
+            if (file.dataURL) {
+                var date = new Date();
+
+                let data = {
+                    name: file.name,
+                    type: file.type,
+                    size: file.size,
+                    dataURL: file.dataURL,
+                    uploadedAt: date.toISOString(),
+                    projectId: instance.projectId
+                }
+
+                this.uploadFile(data); 
+            }
+        },
+
+        vfileAdded(file) {
+            console.log("file 2", file);
+            const instance = this;
+            let theBytes = {};
+
+            var reader = new FileReader();
+            reader.onload = processFile(file);
+            reader.readAsArrayBuffer(file);
+
+            function processFile(theFile) {
+                return function (e) {
+                    theBytes = e.target.result; //.split('base64,')[1]; // use with uploadFile2
+                    
+                    if (!file.dataURL && theBytes) {
+                        var date = new Date();
+                        
+                        let data = {
+                            name: file.name,
+                            type: file.type,
+                            size: file.size,
+                            theBytes: theBytes,
+                            uploadedAt: date.toISOString(),
+                            projectId: instance.projectId
+                        }
+
+                        instance.uploadFile(data); 
+                    }
+                }
+            }
+        },
+        async uploadFile(fileData) {
+            await this.UPLOAD_STICKY_NOTES(fileData).then(res => {
+                console.log(res);
+                this.FETCH_STICKY_NOTES({projectId: this.projectId});
+            })
+        },
+        download(url, name) {
+            var link = document.createElement("a");
+                link.download = name;
+                link.href = url;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                link.remove();
+        },
+        removeStickyFile(fileId) {
+            if (fileId) {
+                var isOkPress = confirm("Are you sure you want to delete this note? You will not get back");
+
+                if (isOkPress === true) {
+                this.DELETE_STICKY_NOTES({id: fileId}).then(res => {
+                    console.log(res);            
+                    this.FETCH_STICKY_NOTES({projectId: this.projectId});
+                })
+                }
+            }
+        },
+        showModal(fileId) {
+            this.selectedFileId = fileId;
+        }
+    },
+    created() {
+        let obj = JSON.parse(localStorage.getItem('vuex'));
+        this.projectId = obj && obj.project && obj.project.selectedProject && obj.project.selectedProject.id ? obj.project.selectedProject.id : "";
+        
+        if (!this.projectId) this.$router.replace(`/home`)
+        this.FETCH_STICKY_NOTES({projectId: this.projectId});
+    }
+  }
+</script>
 
 
 <style lang="scss">
