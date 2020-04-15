@@ -48,6 +48,25 @@ export default {
         })
     },
     // eslint-disable-next-line
+    async DELETE_TASK_GANTT({}, data){
+        if(!data.id) return
+        return await db.collection("taskGantts").doc(data.id).delete().then(ref => {
+            return ref
+        }).catch(err => {
+            console.log(`ERROR : ${err}`);
+            throw new Error(err)
+        })
+    },
+    // eslint-disable-next-line
+    async ADD_TASK_LINK({}, data) {
+        return await db.collection('taskLinks').add(data).then(ref => {
+            return ref;
+        }).catch(err => {
+            console.log("error", err);
+            throw new Error(err);
+        })
+    },
+    // eslint-disable-next-line
     async UPDATE_TASK_GANTT({}, data) {
         if(!data.id) return
         
@@ -57,5 +76,26 @@ export default {
             console.log("error", err);
             throw new Error(err);
         })
-    }
+    },
+    // eslint-disable-next-line
+    async UPDATE_TASK_LINK({}, data) {
+        if(!data.id) return
+        
+        return await db.collection("taskLinks").doc(data.id).update(data).then(ref => {
+            return ref;
+        }).catch(err => {
+            console.log("error", err);
+            throw new Error(err);
+        })
+    },
+    // eslint-disable-next-line
+    async DELETE_TASK_LINK({}, data){
+        if(!data.id) return
+        return await db.collection("taskLinks").doc(data.id).delete().then(ref => {
+            return ref
+        }).catch(err => {
+            console.log(`ERROR : ${err}`);
+            throw new Error(err)
+        })
+    },
 }
