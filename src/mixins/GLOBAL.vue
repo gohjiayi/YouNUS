@@ -1,26 +1,27 @@
 <template>
-    <div></div>
+  <div></div>
 </template>
 
 <script>
-    export default {
-        data(){
-            return {
-                users: [
-                    { id: 1, username: "Ai Fen" },
-                    { id: 2, username: "Sean" },
-                    { id: 3, username: "Jia Yi" },
-                    { id: 4, username: "Jeremy" }
-                ]
-            }
-        },
-        computed:{
-            onlyUserNamesOfUsers(){
-                return this.users.map(u=>u.username)
-            }
-        }
+export default {
+  data(){
+    return {
+      users: [
+        { id: 1, username: "Jnson" },
+        { id: 2, username: "Mark" },
+        { id: 3, username: "Ponting" },
+        { id: 4, username: "lee" }
+      ]
     }
+  },
+  computed:{
+    onlyUserNamesOfUsers(){
+      return this.users.map(u=>u.username)
+    }
+  }
+}
 </script>
 
 <style>
+
 </style>

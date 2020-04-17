@@ -107,10 +107,10 @@ export default {
     async eventCreate() {
       let state = this.calendar.toInput(true);
       state.projectId = this.projectId;
-      
+
       if (this.events && this.events.id ) {
         state.id = this.events.id;
-        
+
         if (state.id) {
           await this.UPDATE_EVENTS(state).then(res => {
               this.$refs.app.setState(state);
@@ -160,11 +160,11 @@ export default {
           ev.data = Vue.util.extend(defaults, ev.data);
         });
       }
-      
+
       this.$refs.app.setState(state);
       this.$refs.app.rebuild(undefined, true, this.$refs.app.currentType); // for data show events not show over each other
     },
-    
+
     async getEventsData() {
       await this.FETCH_EVENTS({projectId: this.projectId}).then(events => {
         console.log("events", events);
@@ -178,7 +178,7 @@ export default {
   created() {
     let obj = JSON.parse(localStorage.getItem('vuex'));
     this.projectId = obj && obj.project && obj.project.selectedProject && obj.project.selectedProject.id ? obj.project.selectedProject.id : "";
-    
+
     if (!this.projectId) this.$router.replace(`/home`)
     this.getEventsData() 
   },

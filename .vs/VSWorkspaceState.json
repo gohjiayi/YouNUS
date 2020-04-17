@@ -3,9 +3,10 @@
     "",
     "\\src",
     "\\src\\components",
+    "\\src\\firebase",
     "\\src\\pages",
-    "\\src\\pages\\Layout"
+    "\\src\\store"
   ],
-  "SelectedNode": "\\src\\pages\\Projects.vue",
+  "SelectedNode": "\\src\\main.js",
   "PreviewInSolutionExplorer": false
 }

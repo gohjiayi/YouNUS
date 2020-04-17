@@ -167,7 +167,6 @@
   }
 </script>
 
-
 <style lang="scss">
 .file-drop {
     border: 1px solid #ebebeb;

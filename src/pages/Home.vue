@@ -1,9 +1,9 @@
 <template>
-    <div class="home-container">
-        <div class="row p-3">
-            <Module v-for="(m,i) in 4" :key="i" :module="i+1" />
-        </div>
+  <div class="home-container">
+    <div class="row p-3">
+      <Module v-for="(m,i) in 4" :key="i" :module="i+1" />
     </div>
+  </div>
 </template>
 
 <script>
@@ -16,4 +16,5 @@ export default {
 </script>
 
 <style>
+
 </style>

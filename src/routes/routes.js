@@ -1,21 +1,9 @@
 import DashboardLayout from "@/pages/Layout/DashboardLayout.vue";
 
-
-import Tasks from "@/pages/Tasks.vue";
-import Resources from "@/pages/Resources.vue";
-import GanttChart from "@/pages/Gantt.vue";
-import Calendar from "@/pages/Calendar.vue";
-import Teammates from "@/pages/Teammates.vue";
-
-import Login from '../components/Login.vue'
-import Landing from '../components/Landing.vue'
-import Register from '../components/Register.vue'
-
 import UserProfile from "@/pages/UserProfile.vue";
 
 const loadLayout = layout => () => import("@/pages/Layout/"+layout+".vue")
 const loadPage = page => () => import("@/pages/"+page+".vue")
-
 
 const routes = [
   {
@@ -28,7 +16,12 @@ const routes = [
         path: 'home',
         name: 'home',
         component: loadPage("Home")
-      }
+      },
+    {
+        path: 'dashboard',
+        name: 'dashboard',
+        component: loadPage("Dashboard")
+    }
     ]
   },
   {
@@ -39,50 +32,46 @@ const routes = [
       {
         path: "tasks",
         name: "Tasks",
-        component: Tasks
+        component: loadPage("Tasks")
       },
       {
         path: "resources",
         name: "Resources",
-        component: Resources
+        component: loadPage("Resources")
       },
       {
         path: "ganttchart",
         name: "GanttChart",
-        component: GanttChart
+        component: loadPage("Gantt")
       },
       {
         path: "calendar",
         name: "Calendar",
-        component: Calendar
+        component: loadPage("Calendar")
+      },
+      {
+        path: "notifications",
+        name: "Notifications",
+        component: loadPage("Notifications")
       },
       {
         path: "teammates",
         name: "Teammates",
-        component: Teammates
+        component: loadPage("Teammates")
       },
     ]
   },
   {
-    path: "/user",
-    name: "User Profile",
-    component: UserProfile
-  },
-  {
-    path: '/login',
-    name: 'login',
-    component: Login
-  },
-  {
-    path: '/landing',
-    name: 'landing',
-      component: Landing
-  },
-  {
-    path: '/register',
-    name: 'register',
-    component: Register
-  },
+    path:"/",
+    component: UserProfile,
+    children: [
+      {
+        path: "user",
+        name: "User Profile",
+        component: UserProfile
+      }
+    ]
+  }
 ];
 
 export default routes;

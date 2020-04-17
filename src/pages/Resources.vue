@@ -1,5 +1,28 @@
 <template>
+  <!-- <Upload></Upload> -->
   <div class="pa-2">
+    <!-- <div class="container"> -->
+      <!-- <div class="card-columns">
+        <div class="card">
+          <div class="card-body p-1">
+            <h5 class="card-title">Minimal Notes</h5>
+            <textarea class="my-3 note-details" name="noteDetails" v-model="noteDetails" rows="5" 
+            placeholder="Insert your note"></textarea>
+            <button type="button" class="btn btn-outline-secondary submit-note-details" 
+              @click="submitNotes()">Submit
+            </button>
+          </div>
+        </div>
+        <div v-for="note in notes" class="card" :key="note.id"> 
+          <div class="card-body note-list-item p1">
+            <p class="card-title">{{getDateFormate(note.submitTime)}}
+              <span class="float-right" style="cursor: pointer" @click="removeNote(note.id)">X</span>
+            </p>
+            <div>{{note.note}}</div>
+          </div>
+        </div>
+      </div> -->
+    <!-- </div>' -->
     <div class="content pl-4">
       <div class="card">
         <div class="card-body p-1">
@@ -68,6 +91,16 @@
     </div>
 
     <stickyNote></stickyNote>
+    
+    <!-- <div class="file-drop">
+      <vue-dropzone ref="myVueDropzone" id="dropzone" class="customdropzone" 
+      @vdropzone-complete="afterComplete" :options="dropzoneOptions" :useCustomSlot=true>
+        <div class="dropzone-custom-content">
+          <i class="fa fa-cloud-upload"></i>
+          <span class="dropzone-custom-title"> Choose files or drag & drop here</span>
+        </div>
+      </vue-dropzone>
+    </div> -->
   </div>
 </template>
 
@@ -172,7 +205,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 // .card {
 //   border: none;
 // }
@@ -204,7 +236,6 @@ export default {
 //     column-count: 4;
 //   }
 // }
-
 
 .note-details {
   width: 100%;

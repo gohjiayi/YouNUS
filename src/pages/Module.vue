@@ -1,12 +1,12 @@
 <template>
-    <div class="col-md-3 col-12 col-sm-6">
-        <div class="card">
-            <div class="card-body module d-flex flex-column justify-content-center text-center title">
-                Module-{{module}}
-            </div>
-        </div>
-        <projects :module="module" />
+  <div class="col-md-3 col-12 col-sm-6">
+    <div class="card">
+      <div class="card-body module d-flex flex-column justify-content-center text-center title">
+        Module-{{module}}
+      </div>
     </div>
+    <projects :module="module" />
+  </div>
 </template>
 
 <script>
@@ -25,7 +25,7 @@ export default {
 </script>
 
 <style scoped>
-    .module {
-        min-height: 100px;
-    }
+.module{
+  min-height: 100px;
+}
 </style>
