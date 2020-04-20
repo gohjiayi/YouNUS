@@ -1,21 +1,14 @@
 import DashboardLayout from "@/pages/Layout/DashboardLayout.vue";
 
-
 import Tasks from "@/pages/Tasks.vue";
-import Resources from "@/pages/Resources.vue";
+import Resources from "@/pages/Resources/ResourcesPage.vue";
 import GanttChart from "@/pages/Gantt.vue";
 import Calendar from "@/pages/Calendar.vue";
-import Teammates from "@/pages/Teammates.vue";
+import Teammates from "@/pages/Teammates/Teammates.vue";
 
-import Login from '../components/Login.vue'
-import Landing from '../components/Landing.vue'
-import Register from '../components/Register.vue'
-
-import UserProfile from "@/pages/UserProfile.vue";
 
 const loadLayout = layout => () => import("@/pages/Layout/"+layout+".vue")
 const loadPage = page => () => import("@/pages/"+page+".vue")
-
 
 const routes = [
   {
@@ -27,7 +20,7 @@ const routes = [
       {
         path: 'home',
         name: 'home',
-        component: loadPage("Home")
+        component: loadPage("LandingPage/Home")
       }
     ]
   },
@@ -61,28 +54,10 @@ const routes = [
         name: "Teammates",
         component: Teammates
       },
+
     ]
   },
-  {
-    path: "/user",
-    name: "User Profile",
-    component: UserProfile
-  },
-  {
-    path: '/login',
-    name: 'login',
-    component: Login
-  },
-  {
-    path: '/landing',
-    name: 'landing',
-      component: Landing
-  },
-  {
-    path: '/register',
-    name: 'register',
-    component: Register
-  },
+
 ];
 
 export default routes;

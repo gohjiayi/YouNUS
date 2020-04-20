@@ -4,7 +4,12 @@
       <nav>
         <ul>
           <li>
-            <a href="http://faq.com">
+            <a href="http://youtube.com">
+              Contact Us
+            </a>
+          </li>
+          <li>
+            <a href="http://youtube.com">
               FAQ
             </a>
           </li>
@@ -12,7 +17,9 @@
       </nav>
       <div class="copyright text-center">
         &copy; {{ new Date().getFullYear() }}
-        stajjx
+        <a href="https://www.creative-tim.com/?ref=mdf-vuejs" target="_blank"
+          >stajjx</a
+        >
       </div>
     </div>
   </footer>

@@ -26,27 +26,27 @@ export default {
       users: [
         {
           id: 1,
-          name: "Dakota Rice",
+          name: "Aw Xin Min",
           major: "Business Analytics",
-          email: "dakota@crescent.com"
+          email: "awxinmin@crescent.com"
         },
         {
           id: 2,
-          name: "Minerva Hooper",
+          name: "Chia Ai Fen",
           major: "Computer Science",
-          email: "hooper1998@gmail.com"
+          email: "chiaifen@gmail.com"
         },
         {
           id: 3,
-          name: "Sage Rodriguez",
+          name: "Goh Jia Yi",
           major: "Business Analytics",
-          email: "sage-jake-rod@gmail.com"
+          email: "goohjy@gmail.com"
         },
         {
           id: 4,
-          name: "Philip Chaney",
+          name: "Sean Lee",
           major: "Business Administration",
-          email: "philip@hotmail.com"
+          email: "seanljh@hotmail.com"
         }
       ]
     };

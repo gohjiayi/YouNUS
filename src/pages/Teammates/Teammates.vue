@@ -1,14 +1,14 @@
 <template>
   <div class="content">
     <div class="md-layout">
-      
-      
+
+
       <div
         class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50"
       >
         <md-card>
           <md-card-header data-background-color="orange">
-            <h4 class="title">Teammates for Group Project</h4>
+            <h4 class="title">Teammates</h4>
             <p class="category">AY2019/20 Semester 2</p>
           </md-card-header>
           <md-card-content>
@@ -21,9 +21,7 @@
 </template>
 
 <script>
-import {
-  OrderedTable
-} from "@/components";
+  import OrderedTable from "./OrderedTable.vue"
 
 export default {
   components: {

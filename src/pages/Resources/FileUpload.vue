@@ -4,10 +4,12 @@
         <div class="file-drop">
             <div class="card bg-light mb-3 slicky-note-list" v-for="stick in stickNotes" :key="stick.id">
                 <div class="card-body text-left d-flex" >
-                    <div @click="download(stick.fullURL, stick.name)" style="width: 90%;">
-                        <div>{{stick.name}}</div>
-                        <div>{{getFileType(stick.type)}}</div>
-                    </div>
+                    <a :href="stick.fullURL" download target="_blank" style="color:black">
+                        <div style="width: 90%;">
+                            <div>{{stick.name}}</div>
+                            <div>{{getFileType(stick.type)}}</div>
+                        </div>
+                    </a>
                     <div class="float-right text-right">
                         <div class="remove-sticky" @click="removeStickyFile(stick.id)">
                             <span>X</span>
@@ -143,7 +145,7 @@
         },
         removeStickyFile(fileId) {
             if (fileId) {
-                var isOkPress = confirm("Are you sure you want to delete this note? You will not get back");
+                var isOkPress = confirm("Are you sure you want to delete this file? You will not get back");
 
                 if (isOkPress === true) {
                 this.DELETE_STICKY_NOTES({id: fileId}).then(res => {
@@ -166,7 +168,6 @@
     }
   }
 </script>
-
 
 <style lang="scss">
 .file-drop {
@@ -233,4 +234,8 @@
         border-radius: 50%;
     }
 }
+.dz-error-mark , .dz-success-mark , .dz-error-message , .dz-remove , .dz-success-mark{
+    display: none !important;
+}
+
 </style>

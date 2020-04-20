@@ -32,10 +32,10 @@ export default {
         let obj = Object.assign({},data)
         delete obj.id
         return await db.collection("tasks").doc(data.id).update(data).then(ref => {
-            return ref
+          return ref
         }).catch(err => {
-            console.log(`ERROR : STORE : tasks : tasksActions : UPDATE_tasks : ${err}`);
-            throw new Error(err)
+          console.log(`ERROR : STORE : tasks : tasksActions : UPDATE_tasks : ${err}`);
+          throw new Error(err)
         })
     },
     // eslint-disable-next-line
