@@ -1,7 +1,7 @@
 <template>
   <div class="home-container">
     <div class="row p-3">
-      <Module v-for="module in modules" :module="module" />
+      <Module v-for="module in moduleCodes" :module="module" />
     </div>
   </div>
 </template>
@@ -14,12 +14,20 @@ export default {
   },
   data: function() {
     return {
-      modules: ["BT3103","BT3102","GEH1019","IS3103"]
+      moduleCodes: ["BT3103","BT3102","GEH1019","IS3103"],
+      moduleNames: ["Application Systems Development for Business Analytics", 
+                    "Computational Methods for Business Analytics",
+                    "Food & Health",
+                    "Information Systems Leadership and Communication"]
     }
-  }
+  },
 }
 </script>
 
 <style>
+body {
+    background-color: #EEEEEE;
+}
+
 
 </style>

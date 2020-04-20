@@ -1,12 +1,11 @@
 {
   "ExpandedNodes": [
     "",
+    "\\components",
     "\\components\\SidebarPlugin",
     "\\pages",
-    "\\pages\\Layout",
-    "\\pages\\Teammates",
-    "\\routes"
+    "\\pages\\Layout"
   ],
-  "SelectedNode": "\\main.js",
+  "SelectedNode": "\\pages\\Dashboard.vue",
   "PreviewInSolutionExplorer": false
 }
