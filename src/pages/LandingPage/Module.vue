@@ -2,7 +2,7 @@
   <div class="col-md-3 col-12 col-sm-6">
     <div class="card">
       <div class="card-body module d-flex flex-column justify-content-center text-center title">
-        Module-{{module}}
+        {{module}}
       </div>
     </div>
     <projects :module="module" />
@@ -10,17 +10,12 @@
 </template>
 
 <script>
-import Projects from "@/pages/Projects.vue"
+import Projects from "./Projects.vue"
 export default {
   components: {
     Projects
   },
-  props: {
-    module: {
-      type: Number,
-      default: 1
-    }
-  },
+  props:['module'],
 }
 </script>
 

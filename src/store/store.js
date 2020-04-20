@@ -8,10 +8,10 @@ import events from "./events";
 import gantt from "./gantt";
 import tasks from "./tasks";
 import notes from "./notes";
-import stickyNotes from "./sticky-note";
+import stickyNotes from "./meeting minutes";
 import comments from "./comments"
 import project from "./project"
- 
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({

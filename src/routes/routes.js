@@ -1,6 +1,11 @@
 import DashboardLayout from "@/pages/Layout/DashboardLayout.vue";
 
-import UserProfile from "@/pages/UserProfile.vue";
+import Tasks from "@/pages/Tasks.vue";
+import Resources from "@/pages/Resources/ResourcesPage.vue";
+import GanttChart from "@/pages/Gantt.vue";
+import Calendar from "@/pages/Calendar.vue";
+import Teammates from "@/pages/Teammates/Teammates.vue";
+
 
 const loadLayout = layout => () => import("@/pages/Layout/"+layout+".vue")
 const loadPage = page => () => import("@/pages/"+page+".vue")
@@ -15,13 +20,13 @@ const routes = [
       {
         path: 'home',
         name: 'home',
-        component: loadPage("Home")
+        component: loadPage("LandingPage/Home")
       },
-    {
+      {
         path: 'dashboard',
         name: 'dashboard',
         component: loadPage("Dashboard")
-    }
+      }
     ]
   },
   {
@@ -32,46 +37,32 @@ const routes = [
       {
         path: "tasks",
         name: "Tasks",
-        component: loadPage("Tasks")
+        component: Tasks
       },
       {
         path: "resources",
         name: "Resources",
-        component: loadPage("Resources")
+        component: Resources
       },
       {
         path: "ganttchart",
         name: "GanttChart",
-        component: loadPage("Gantt")
+        component: GanttChart
       },
       {
         path: "calendar",
         name: "Calendar",
-        component: loadPage("Calendar")
-      },
-      {
-        path: "notifications",
-        name: "Notifications",
-        component: loadPage("Notifications")
+        component: Calendar
       },
       {
         path: "teammates",
         name: "Teammates",
-        component: loadPage("Teammates")
+        component: Teammates
       },
+
     ]
   },
-  {
-    path:"/",
-    component: UserProfile,
-    children: [
-      {
-        path: "user",
-        name: "User Profile",
-        component: UserProfile
-      }
-    ]
-  }
+
 ];
 
 export default routes;

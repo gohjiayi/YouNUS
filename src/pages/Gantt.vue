@@ -4,7 +4,7 @@
   <div>
     <button type="button" class="btn btn-primary ml-4" @click="openTaskModal()">Create New Task</button>
     <div class="container gantt-containet">
-      <ganttComponent ref="ganttComponent" id="js-gantt-container" class="left-container" :tasks="tasks.data && tasks.data.length ? tasks : ganttData"
+      <ganttComponent v-if="!loading" ref="ganttComponent" id="js-gantt-container" class="left-container" 
         @task-updated="logTaskUpdate" @link-updated="logLinkUpdate" 
         @taskSelected="selectTask()">
       </ganttComponent>
@@ -33,26 +33,10 @@ export default {
         data: [], links: []
       },
       projectId: "",
+      loading: true
     }
   },
   mixins:[GanttMixin],
-  computed: {
-    ...mapGetters("gantt", ["gantt"]),
-    tasks() {
-      let gantt = this.$store.state.gantt.gantt,
-          task = {
-            data: [], link: []
-          };
-
-      if (gantt.data) {
-        task = {
-          data: gantt && gantt.data ? gantt.data : [],
-          links: gantt && gantt.links ? gantt.links : [],
-        }
-      }
-      return task
-    }
-  },
   methods: {
     ...mapActions("gantt",["FETCH_GANTTS", "ADD_TASK_GANTT", "UPDATE_TASK_GANTT", "DELETE_TASK_GANTT", "ADD_TASK_LINK", "UPDATE_TASK_LINK", "DELETE_TASK_LINK"]),
     addMessage (message) {
@@ -163,14 +147,19 @@ export default {
     }
   },
 
-  created() {
+  async created() {
     let obj = JSON.parse(localStorage.getItem('vuex'));
     this.projectId = obj && obj.project && obj.project.selectedProject && obj.project.selectedProject.id ? obj.project.selectedProject.id : "";
+    await this.FETCH_GANTTS({projectId: this.projectId}).then(res=>{
+      this.ganttData = res
+      this.loading = false
+    })
+    console.log("GANT_DATA",this.ganttData);
     if (!this.projectId) this.$router.replace(`/home`);
     // this.FETCH_GANTTS();
   },
   async mounted() {
-    this.ganttData = await this.FETCH_GANTTS({projectId: this.projectId});
+    
   }
 }
 </script>

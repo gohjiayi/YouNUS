@@ -1,7 +1,9 @@
 <template>
   <div class="wrapper" :class="{ 'nav-open': $sidebar.showSidebar }">
-    <app-header/>
-    <side-bar style="margin-top:75px">
+    <app-header />
+    <notifications></notifications>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <side-bar style="margin-top:50px">
       <mobile-menu slot="content"></mobile-menu>
       <sidebar-link to="/resources">
         <md-icon>folder_shared</md-icon>
@@ -23,11 +25,17 @@
         <md-icon>supervisor_account</md-icon>
         <p>Teammates</p>
       </sidebar-link>
+      <sidebar-link to="/notifications">
+        <md-icon>notifications</md-icon>
+        <p>Notifications</p>
+      </sidebar-link>
     </side-bar>
 
-    <div class="main-panel">
+    <div class="main-panel" style="margin-top:50px">
       <top-navbar></top-navbar>
       <dashboard-content> </dashboard-content>
+
+      <content-footer v-if="!$route.meta.hideFooter"></content-footer>
     </div>
   </div>
 </template>
@@ -36,13 +44,17 @@
 
 <script>
 import TopNavbar from "./TopNavbar.vue";
+import ContentFooter from "./ContentFooter.vue";
 import DashboardContent from "./Content.vue";
+import MobileMenu from "@/pages/Layout/MobileMenu.vue";
 import AppHeader from "@/components/Header.vue"
 
 export default {
   components: {
     TopNavbar,
     DashboardContent,
+    ContentFooter,
+    MobileMenu,
     AppHeader
   }
 };

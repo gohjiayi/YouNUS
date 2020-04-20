@@ -4,28 +4,55 @@
  
 <script>
 import moment from "moment"
+import { mapActions, mapGetters } from "vuex";
 import {gantt} from 'dhtmlx-gantt';
 import 'dhtmlx-gantt/codebase/ext/dhtmlxgantt_marker.js';
 import "dhtmlx-gantt/codebase/dhtmlxgantt.css"
 import $ from 'jquery'
 import GanttMixin from "@/mixins/GanttMixin.vue"
 export default {
-  props: {
-    tasks: {
-      type: Object,
-      default () {
-        return {data: [], links: []}
-      }
-    }
-  },
   mixins:[GanttMixin],
-  watch: {
-    tasks(val) {
-      console.log("val", val);
-      
+  computed: {
+    ...mapGetters("gantt", ["gantt"]),
+    tasks() {
+      let gantt = this.$store.state.gantt.gantt,
+          task = {
+            data: [], link: []
+          };
+
+      if (gantt.data) {
+        task = {
+          data: gantt && gantt.data ? gantt.data : [],
+          links: gantt && gantt.links ? gantt.links : [],
+        }
+      }
+      return task
     }
   },
  methods: {
+   init(){
+     this.$_initGanttEvents();
+    gantt.config.xml_date = "%Y-%m-%d";
+    gantt.config.autosize = "y";
+    gantt.config.start_date = new Date(moment().subtract(60,"days"))
+    gantt.config.show_tasks_outside_timescale = true;
+    console.log("TASKS",this.tasks);
+    try{
+      gantt.clearAll();
+    }catch(e){}
+    gantt.init(this.$refs.gantt, new Date(moment().subtract(60,"days")),new Date(moment().add(60,"days")));
+    gantt.parse(this.tasks);
+    var dateToStr = gantt.date.date_to_str(gantt.config.task_date);
+    gantt.addMarker({
+      start_date: new Date(), //a Date object that sets the marker's date
+      css: "today", //a CSS class applied to the marker
+      text: "Today", //the marker title
+      title: dateToStr( new Date()) // the marker's tooltip
+    });
+    this.$_initDataProcessor();
+    this.$forceUpdate()
+    gantt.refreshData();
+   },
     $_initGanttEvents: function() {
       let _this = this
       if (!gantt.$_eventsInitialized) {
@@ -78,10 +105,9 @@ export default {
   },
   watch: {
     tasks: function(newValue) {
+      this.init()
       if (newValue) {
-        this.tasks.data = newValue.data,
-        this.tasks.links = newValue.links;
-        gantt.parse(this.$props.tasks);
+        gantt.parse(this.tasks);
 
         newValue.data.forEach(e => {
           if (e.type === "urgent") {
@@ -94,21 +120,7 @@ export default {
     }
   },
   mounted: function () { 
-    this.$_initGanttEvents();
-    gantt.config.xml_date = "%Y-%m-%d";
-    gantt.config.autosize = "y";
-    gantt.config.start_date = new Date();
-    gantt.config.show_tasks_outside_timescale = true;
-    gantt.init(this.$refs.gantt, new Date(moment().subtract(60,"days")),new Date(moment().add(60,"days")));
-    gantt.parse(this.$props.tasks);
-    var dateToStr = gantt.date.date_to_str(gantt.config.task_date);
-    gantt.addMarker({
-      start_date: new Date(), //a Date object that sets the marker's date
-      css: "today", //a CSS class applied to the marker
-      text: "Today", //the marker title
-      title: dateToStr( new Date()) // the marker's tooltip
-    });
-    this.$_initDataProcessor();
+    this.init()
   }
 }
 </script>

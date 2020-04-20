@@ -1,3 +1,19 @@
+// =========================================================
+// * Vue Material Dashboard - v1.3.2
+// =========================================================
+//
+// * Product Page: https://www.creative-tim.com/product/vue-material-dashboard
+// * Copyright 2019 Creative Tim (https://www.creative-tim.com)
+// * Licensed under MIT (https://github.com/creativetimofficial/vue-material-dashboard/blob/master/LICENSE.md)
+//
+// * Coded by Creative Tim
+//
+// =========================================================
+//
+// * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+// The Vue build version to load with the `import` command
+// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from "vue";
 import Vuex from 'vuex'
 import VueRouter from "vue-router";
@@ -10,9 +26,7 @@ import VueToast from 'vue-toast-notification';
 import routes from "./routes/routes";
 
 // Plugins
-import GlobalComponents from "./globalComponents";
 import GlobalDirectives from "./globalDirectives";
-import Notifications from "./components/NotificationPlugin";
 
 // MaterialDashboard plugin
 import MaterialDashboard from "./material-dashboard";
@@ -61,9 +75,7 @@ Vue.use(Vuex)
 Vue.use(Vuetify);
 Vue.use(VueRouter);
 Vue.use(MaterialDashboard);
-Vue.use(GlobalComponents);
 Vue.use(GlobalDirectives);
-Vue.use(Notifications);
 Vue.use(DaySpanVuetify, {
   methods: {
     getDefaultEventColor: () => '#1976d2'

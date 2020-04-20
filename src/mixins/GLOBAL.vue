@@ -7,10 +7,10 @@ export default {
   data(){
     return {
       users: [
-        { id: 1, username: "Jnson" },
-        { id: 2, username: "Mark" },
-        { id: 3, username: "Ponting" },
-        { id: 4, username: "lee" }
+        { id: 1, username: "Xin Min" },
+        { id: 2, username: "Ai Fen" },
+        { id: 3, username: "Jia Yi" },
+        { id: 4, username: "Sean" }
       ]
     }
   },

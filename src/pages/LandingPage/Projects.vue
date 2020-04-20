@@ -1,10 +1,15 @@
 <template>
   <div class="projects-container">
 
-    <div class="card project my-2" v-for="(project,pI) in projects" :key="pI" @click="gotohome(project)"  style="cursor:pointer">
+    <div class="card project my-2" v-for="(project,pI) in projects" :key="pI"  style="cursor:pointer">
       <div class="card-body">
-        <p class="title">{{project.projectName}}</p>
-        <p>Due Date : {{project.dueDate}}</p>
+        <div>
+          <span @click="deleteProject(project)">
+            <i class="fa fa-remove float-right"></i>
+          </span>
+        </div>
+        <p @click="gotohome(project)" class="title">{{project.projectName}}</p>
+        <p @click="gotohome(project)">Due Date : {{project.dueDate}}</p>
       </div>
     </div>
 
@@ -51,7 +56,7 @@ export default {
     })
   },
   methods:{
-    ...mapActions("project",["ADD_PROJECT","FETCH_PROJECTS"]),
+    ...mapActions("project",["ADD_PROJECT","FETCH_PROJECTS","DELETE_PROJECT"]),
     ...mapMutations("project",["UPDATE_SELECTED_PROJECT"]),
     openModal(){
       this.showProjectModal = true
@@ -63,6 +68,19 @@ export default {
         module: this.module
       }
       await this.ADD_PROJECT(obj).then(async res => {
+        await this.FETCH_PROJECTS(this.module).then(getRes => {
+          this.projects = getRes
+          this.showProjectModal = false
+          this.projectName = ""
+          this.dueDate = new Date()
+        })
+      })
+    },
+    async deleteProject(project){
+      let obj = {
+        id: project.id
+      }
+      await this.DELETE_PROJECT(obj).then(async res => {
         await this.FETCH_PROJECTS(this.module).then(getRes => {
           this.projects = getRes
           this.showProjectModal = false
