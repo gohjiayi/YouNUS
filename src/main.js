@@ -16,7 +16,6 @@ import GlobalDirectives from "./globalDirectives";
 import MaterialDashboard from "./material-dashboard";
 
 import Chartist from "chartist";
-// import firebase from 'firebase';
 import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
@@ -28,12 +27,15 @@ import 'vue-toast-notification/dist/theme-default.css';
 // Vuex Store
 import store from './store/store';
 
-// Firebase
-// import '@/firebase/firebaseConfig'
-
-
 Vue.use(BootstrapVue);
 Vue.config.productionTip = false
+
+// Firebase
+import firebase from 'firebase';
+import '@/firebase/firebaseConfig'
+firebase.auth().onAuthStateChanged(user => {
+    store.dispatch("fetchUser", user);
+});
 
 // configure router
 const router = new VueRouter({

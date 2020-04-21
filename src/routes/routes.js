@@ -1,12 +1,5 @@
 import DashboardLayout from "@/pages/Layout/DashboardLayout.vue";
 
-import Tasks from "@/pages/Tasks.vue";
-import Resources from "@/pages/Resources/ResourcesPage.vue";
-import GanttChart from "@/pages/Gantt.vue";
-import Calendar from "@/pages/Calendar.vue";
-import Teammates from "@/pages/Teammates/Teammates.vue";
-
-
 const loadLayout = layout => () => import("@/pages/Layout/"+layout+".vue")
 const loadPage = page => () => import("@/pages/"+page+".vue")
 
@@ -15,7 +8,7 @@ const routes = [
     path: '',
     name: 'default',
     component: loadLayout("DefaultLayout"),
-    redirect: '/home',
+    redirect: '/auth',
     children: [
       {
         path: 'home',
@@ -26,7 +19,22 @@ const routes = [
         path: 'dashboard',
         name: 'dashboard',
         component: loadPage("Dashboard")
-      }
+      },
+      {
+        path: '/auth',
+        name: 'auth',
+        component: loadPage("Authentication/Auth")
+      },
+      {
+        path: '/login',
+        name: 'login',
+        component: loadPage("Authentication/Login")
+      },
+      {
+        path: '/register',
+        name: 'register',
+        component: loadPage("Authentication/Register")
+      },
     ]
   },
   {
@@ -37,27 +45,27 @@ const routes = [
       {
         path: "tasks",
         name: "Tasks",
-        component: Tasks
+        component: loadPage("Tasks")
       },
       {
         path: "resources",
         name: "Resources",
-        component: Resources
+        component: loadPage("Resources/ResourcesPage")
       },
       {
         path: "ganttchart",
         name: "GanttChart",
-        component: GanttChart
+        component: loadPage("Gantt")
       },
       {
         path: "calendar",
         name: "Calendar",
-        component: Calendar
+        component: loadPage("Calendar")
       },
       {
         path: "teammates",
         name: "Teammates",
-        component: Teammates
+        component: loadPage("Teammates/Teammates")
       },
 
     ]
