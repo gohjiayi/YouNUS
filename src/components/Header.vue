@@ -24,76 +24,78 @@
             </ul>
         </template>
 
-        
+
     </nav>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import firebase from "firebase";
-export default {
-  computed: {
-    ...mapGetters({
-// map `this.user` to `this.$store.getters.user`
-      user: "user"
-    })
-  },
-  methods: {
-    signOut() {
-      firebase
-        .auth()
-        .signOut()
-        .then(() => {
-          this.$router.replace({
-            name: "auth"
-          });
-        });
-    }
-  }
-};
+    import { mapGetters } from "vuex";
+    import firebase from "firebase";
+    export default {
+        computed: {
+            ...mapGetters({
+                // map `this.user` to `this.$store.getters.user`
+                user: "user"
+            })
+        },
+        methods: {
+            signOut() {
+                firebase
+                    .auth()
+                    .signOut()
+                    .then(() => {
+                        this.$router.replace({
+                            name: "auth"
+                        });
+                    });
+            }
+        }
+    };
 </script>
 
 <style scoped>
-.navbar{
-  display: block;
-  border-radius: 0 !important;
-  z-index: 10;
-  position: fixed;
-  width: 100%;
-  background-color: #060a38
-}
-nav a{
-  color: white !important;
-}
+    .navbar {
+        display: block;
+        border-radius: 0 !important;
+        z-index: 10;
+        position: fixed;
+        width: 100%;
+        background-color: #060a38
+    }
 
-li {
-  float: left;
-  display: inline;
-}
+    nav a {
+        color: white !important;
+    }
 
-li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 10px;
-  text-decoration: none;
-  cursor: pointer;
-}
+    li {
+        float: left;
+        display: inline;
+    }
 
-li a:hover {
-  background-color: #1057c7;
-  font-style:italic
-}
-.active {
-  background-color: #87aceb;
-}
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            text-decoration: none;
+            cursor: pointer;
+        }
 
-li name{
-  display: block;
-  color: #ef9349;
-  text-align: center;
-  font-weight:bold;
-  padding: 10px;
-  text-decoration: none;
-}
+            li a:hover {
+                background-color: #1057c7;
+                font-style: italic
+            }
+
+    .active {
+        background-color: #87aceb;
+    }
+
+    li name {
+        display: block;
+        color: #ef9349;
+        text-align: center;
+        font-weight: bold;
+        padding: 10px;
+        text-decoration: none;
+    }
 </style>

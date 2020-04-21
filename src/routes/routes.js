@@ -24,7 +24,7 @@ const routes = [
         path: '/auth',
         name: 'auth',
         component: loadPage("Authentication/Auth")
-      },
+      }, 
       {
         path: '/login',
         name: 'login',
