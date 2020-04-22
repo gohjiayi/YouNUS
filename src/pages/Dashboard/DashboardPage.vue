@@ -15,8 +15,8 @@
                 </div>
             </card-component>
 
-            <card-component title="Pie Chart" class="has-table has-mobile-sort-spaced">
-                <clients-table-sample :data-url="`${$router.options.base}data-sources/clients.json`"/>
+            <card-component title="Doughnut Chart of Current Task Status Breakdown" class="has-table has-mobile-sort-spaced">
+                <Pie></Pie>
             </card-component>
         </section>
     </div>
@@ -30,6 +30,7 @@
     import CardWidget from './CardWidget'
     import CardComponent from './CardComponent'
     import ClientsTableSample from './ClientsTableSample'
+    import Pie from './Charts/piechart.js'
     export default {
         name: 'home',
         components: {
@@ -38,6 +39,7 @@
             CardWidget,
             Tiles,
             HeroBar,
+            Pie
         },
         data () {
             return {

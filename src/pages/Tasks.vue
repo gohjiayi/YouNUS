@@ -248,11 +248,11 @@
         selectedStatus: "",
         status: [
           // { id: 0, name: "All", color: "lightgrey" },
-          { id: 1, name: "To Do", color: "#3358FF" },
-          { id: 2, name: "In Progress", color: "#B233FF" },
-          { id: 3, name: "In Review", color: "#FCFF33" },
-          { id: 4, name: "Completed", color: "#3CFF33" },
-          { id: 5, name: "Canceled", color: "#FF3333" }
+          { id: 1, name: "To Do", color: "#9EC1CF" },
+          { id: 2, name: "In Progress", color: "#CC99C9" },
+          { id: 3, name: "In Review", color: "#FFE662" },
+          { id: 4, name: "Completed", color: "#9EE09E" },
+          { id: 5, name: "Canceled", color: "#FF6663" }
         ],
         selectedRelared: "",
         relatedTo: [
