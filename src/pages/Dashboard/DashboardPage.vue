@@ -4,12 +4,16 @@
             Dashboard
         </hero-bar>
         <section class="section is-main-section">
-            <tiles>
+            <!-- <tiles>
                 <card-widget class="tile is-child" type="is-primary" icon="account-multiple" :number="5" label="Active Projects"/>
                 <card-widget class="tile is-child" type="is-info" icon="cart-outline" :number="77" label="Tasks"/>
                 <card-widget class="tile is-child" type="is-success" icon="chart-timeline-variant" :number="25" label="Files"/>
-            </tiles>
-
+            </tiles> -->
+<tiles>
+           <card-component title="Current Active Projects" @header-icon-click="fillChartData" icon="finance" header-icon="reload">
+                <ActiveProjects></ActiveProjects>
+            </card-component>
+ </tiles> 
             <card-component title="Upcoming Due Dates" @header-icon-click="fillChartData" icon="finance" header-icon="reload">
                 <UpcomingTasks></UpcomingTasks>
             </card-component>
@@ -31,6 +35,7 @@
     import CardComponent from './CardComponent'
     import ClientsTableSample from './ClientsTableSample'
     import Pie from './Charts/piechart.js'
+    import ActiveProjects from './ActiveProjects.vue'
     export default {
         name: 'home',
         components: {
@@ -40,7 +45,8 @@
             Tiles,
             HeroBar,
             UpcomingTasks,
-            Pie
+            Pie,
+            ActiveProjects
         },
         data () {
             return {
