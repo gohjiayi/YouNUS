@@ -11,18 +11,18 @@
 <script>
     const firebase = require('../../firebase/firebaseConfig.js');
     export default {
-        data(){ 
+        data(){
             return {
                 tasksList: [],
             };
-        }, 
+        },
         mounted() {
-            // current date => to get upcoming tasks 
+            // current date => to get upcoming tasks
             var time= new Date().toJSON().slice(0,10)
             var projectID=0
             // console.log(time)
             firebase.db.collection('tasks').orderBy("date").limit(5).where("date", ">=", time).get().then((querySnapShot)=>{
-                let item={} 
+                let item={}
                 querySnapShot.forEach(doc=>{
                     item=doc.data();
                     // console.log(item);
@@ -47,9 +47,9 @@
                         // console.log("No such document!")
                     // }
                 // })
-                
+
             // }
-             
+
         },
     };
 </script>

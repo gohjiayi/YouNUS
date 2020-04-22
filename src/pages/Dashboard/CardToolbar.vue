@@ -16,6 +16,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'CardToolbar',
   props: {
@@ -26,3 +27,4 @@ export default {
   }
 }
 </script>
+

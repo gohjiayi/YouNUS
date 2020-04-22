@@ -4,8 +4,8 @@
     <div class="card project my-2" v-for="(project,pI) in projects" :key="pI"  style="cursor:pointer">
       <div class="card-body">
         <div>
-          <span @click="deleteProject(project)">
-            <i class="fa fa-remove float-right"></i>
+          <span @click="deleteProject(project)" style="display: inline-block; text-align: right; float: right;">
+            <i class="fa fa-times"></i>
           </span>
         </div>
         <p @click="gotohome(project)" class="title">{{project.projectName}}</p>
