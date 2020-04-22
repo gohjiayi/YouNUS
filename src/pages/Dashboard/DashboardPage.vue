@@ -13,7 +13,13 @@
            <card-component title="Current Active Projects" @header-icon-click="fillChartData" icon="finance" header-icon="reload">
                 <ActiveProjects></ActiveProjects>
             </card-component>
- </tiles> 
+</tiles> 
+
+<tiles>
+           <card-component title="Current Active Tasks" @header-icon-click="fillChartData" icon="finance" header-icon="reload">
+                <ActiveTasks></ActiveTasks>
+            </card-component>
+</tiles> 
             <card-component title="Upcoming Due Dates" @header-icon-click="fillChartData" icon="finance" header-icon="reload">
                 <UpcomingTasks></UpcomingTasks>
             </card-component>
@@ -36,6 +42,8 @@
     import ClientsTableSample from './ClientsTableSample'
     import Pie from './Charts/piechart.js'
     import ActiveProjects from './ActiveProjects.vue'
+    import ActiveTasks from './ActiveTasks.vue'
+    
     export default {
         name: 'home',
         components: {
@@ -46,7 +54,8 @@
             HeroBar,
             UpcomingTasks,
             Pie,
-            ActiveProjects
+            ActiveProjects,
+            ActiveTasks
         },
         data () {
             return {
@@ -137,10 +146,3 @@
         }
     }
 </script>
-
-
-
-
-
-
-
