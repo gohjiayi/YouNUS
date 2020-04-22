@@ -28,3 +28,6 @@ https://github.com/ClickerMonkey/dayspan-vuetify-example/blob/master/src/App.vue
 
 ## dhtmlx gantt chart 
 https://dhtmlx.com/blog/use-dhtmlxgantt-vue-js-framework-demo/
+
+## admin-one-vue-bulma-dashboard
+https://github.com/vikdiesel/admin-one-vue-bulma-dashboard
