@@ -15,6 +15,9 @@
             </card-component>
 </tiles> 
 
+            <card-component title="Project Countdown" @header-icon-click="fillChartData" icon="finance" header-icon="reload"> 
+                <ProjectCountdown></ProjectCountdown> 
+            </card-component> 
 <tiles>
            <card-component title="Current Active Tasks" @header-icon-click="fillChartData" icon="finance" header-icon="reload">
                 <ActiveTasks></ActiveTasks>
@@ -26,6 +29,7 @@
 
             <card-component title="Doughnut Chart of Current Task Status Breakdown" class="has-table has-mobile-sort-spaced">
                 <Pie></Pie>
+                
             </card-component>
         </section>
     </div>
@@ -34,6 +38,7 @@
 <script>
     // @ is an alias to /src
     import UpcomingTasks from './UpcomingTasks.vue'
+    import ProjectCountdown from './ProjectCountdown.vue'
     import * as chartConfig from './Charts/chart.config'
     import HeroBar from './HeroBar'
     import Tiles from './Tiles'
@@ -53,6 +58,7 @@
             Tiles,
             HeroBar,
             UpcomingTasks,
+            ProjectCountdown
             Pie,
             ActiveProjects,
             ActiveTasks
