@@ -10,8 +10,6 @@ import VueToast from 'vue-toast-notification';
 import '@/scss/main.scss'
 import '@mdi/font/css/materialdesignicons.css'
 
-
-
 // router setup
 import routes from "./routes/routes";
 
