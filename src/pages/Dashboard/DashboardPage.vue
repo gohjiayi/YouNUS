@@ -13,16 +13,18 @@
            <card-component title="Current Active Projects" @header-icon-click="fillChartData" icon="finance" header-icon="reload">
                 <ActiveProjects></ActiveProjects>
             </card-component>
+
+
+
+           <card-component title="Current Active Tasks" @header-icon-click="fillChartData" icon="finance" header-icon="reload">
+                <ActiveTasks></ActiveTasks>
+            </card-component>
 </tiles> 
 
             <card-component title="Project Countdown" @header-icon-click="fillChartData" icon="finance" header-icon="reload"> 
                 <ProjectCountdown></ProjectCountdown> 
             </card-component> 
-<tiles>
-           <card-component title="Current Active Tasks" @header-icon-click="fillChartData" icon="finance" header-icon="reload">
-                <ActiveTasks></ActiveTasks>
-            </card-component>
-</tiles> 
+
             <card-component title="Upcoming Due Dates" @header-icon-click="fillChartData" icon="finance" header-icon="reload">
                 <UpcomingTasks></UpcomingTasks>
             </card-component>
