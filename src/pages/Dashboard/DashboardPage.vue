@@ -11,8 +11,7 @@
             </tiles>
 
             <card-component title="Upcoming Due Dates" @header-icon-click="fillChartData" icon="finance" header-icon="reload">
-                <div v-if="defaultChart.chartData" class="chart-area">
-                </div>
+                <UpcomingTasks></UpcomingTasks>
             </card-component>
 
             <card-component title="Pie Chart" class="has-table has-mobile-sort-spaced">
@@ -24,6 +23,7 @@
 
 <script>
     // @ is an alias to /src
+    import UpcomingTasks from './UpcomingTasks.vue'
     import * as chartConfig from './Charts/chart.config'
     import HeroBar from './HeroBar'
     import Tiles from './Tiles'
@@ -38,6 +38,7 @@
             CardWidget,
             Tiles,
             HeroBar,
+            UpcomingTasks
         },
         data () {
             return {
