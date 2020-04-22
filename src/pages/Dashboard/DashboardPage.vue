@@ -5,17 +5,21 @@
         </hero-bar>
         <section class="section is-main-section">
             <tiles>
-                <card-widget class="tile is-child" type="is-primary" icon="account-multiple" :number="5" label="Active Projects"/>
-                <card-widget class="tile is-child" type="is-info" icon="cart-outline" :number="77" label="Tasks"/>
-                <card-widget class="tile is-child" type="is-success" icon="chart-timeline-variant" :number="25" label="Files"/>
+                <card-widget class="tile is-child" type="is-primary" icon="account-multiple" :number="5" label="Active Projects" />
+                <card-widget class="tile is-child" type="is-info" icon="cart-outline" :number="77" label="Tasks" />
+                <card-widget class="tile is-child" type="is-success" icon="chart-timeline-variant" :number="25" label="Files" />
             </tiles>
+
+            <card-component title="Project Countdown" @header-icon-click="fillChartData" icon="finance" header-icon="reload"> 
+                <ProjectCountdown></ProjectCountdown> 
+            </card-component> 
 
             <card-component title="Upcoming Due Dates" @header-icon-click="fillChartData" icon="finance" header-icon="reload">
                 <UpcomingTasks></UpcomingTasks>
             </card-component>
 
             <card-component title="Pie Chart" class="has-table has-mobile-sort-spaced">
-                <clients-table-sample :data-url="`${$router.options.base}data-sources/clients.json`"/>
+                <clients-table-sample :data-url="`${$router.options.base}data-sources/clients.json`" />
             </card-component>
         </section>
     </div>
@@ -24,6 +28,7 @@
 <script>
     // @ is an alias to /src
     import UpcomingTasks from './UpcomingTasks.vue'
+    import ProjectCountdown from './ProjectCountdown.vue'
     import * as chartConfig from './Charts/chart.config'
     import HeroBar from './HeroBar'
     import Tiles from './Tiles'
@@ -38,7 +43,8 @@
             CardWidget,
             Tiles,
             HeroBar,
-            UpcomingTasks
+            UpcomingTasks,
+            ProjectCountdown
         },
         data () {
             return {
