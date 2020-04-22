@@ -6,6 +6,12 @@ import DaySpanVuetify from 'dayspan-vuetify'
 import App from "./App";
 import VueToast from 'vue-toast-notification';
 
+/* Styles */
+import '@/scss/main.scss'
+import '@mdi/font/css/materialdesignicons.css'
+
+
+
 // router setup
 import routes from "./routes/routes";
 
@@ -33,6 +39,10 @@ Vue.config.productionTip = false
 // Firebase
 import firebase from 'firebase';
 import '@/firebase/firebaseConfig'
+import Buefy from 'buefy'
+import './assets/scss/app.scss'
+
+Vue.use(Buefy)
 firebase.auth().onAuthStateChanged(user => {
     store.dispatch("fetchUser", user);
 });

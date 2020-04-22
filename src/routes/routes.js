@@ -18,22 +18,12 @@ const routes = [
       {
         path: 'dashboard',
         name: 'dashboard',
-        component: loadPage("Dashboard")
+        component: loadPage("Dashboard/DashboardPage")
       },
       {
         path: '/auth',
         name: 'auth',
-        component: loadPage("Authentication/Auth")
-      }, 
-      {
-        path: '/login',
-        name: 'login',
-        component: loadPage("Authentication/Login")
-      },
-      {
-        path: '/register',
-        name: 'register',
-        component: loadPage("Authentication/Register")
+        component: loadPage("Authentication")
       },
     ]
   },
@@ -55,7 +45,7 @@ const routes = [
       {
         path: "ganttchart",
         name: "GanttChart",
-        component: loadPage("Gantt")
+        component: loadPage("Gantt/GanttPage")
       },
       {
         path: "calendar",
