@@ -58,7 +58,7 @@
             Tiles,
             HeroBar,
             UpcomingTasks,
-            ProjectCountdown
+            ProjectCountdown,
             Pie,
             ActiveProjects,
             ActiveTasks
