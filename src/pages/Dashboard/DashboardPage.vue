@@ -9,9 +9,9 @@
                 <card-widget1 class="tile is-child" type="is-info" icon="briefcase" label="Current Active Tasks"/>
             </tiles>
 
-            <card-component title="Project Countdown" @header-icon-click="fillChartData" icon="finance" header-icon="reload"> 
-               <ProjectCountdown></ProjectCountdown> 
-            </card-component> 
+            <card-component title="Project Countdown" @header-icon-click="fillChartData" icon="finance" header-icon="reload">
+               <ProjectCountdown></ProjectCountdown>
+            </card-component>
 
             <card-component title="Upcoming Due Dates" @header-icon-click="fillChartData" icon="finance" header-icon="reload">
                 <UpcomingTasks></UpcomingTasks>
@@ -47,7 +47,7 @@
     import ActiveProjects from './ActiveProjects.vue'
     import ActiveTasks from './ActiveTasks.vue'
     import CardWidget1 from './CardWidget1'
-    
+
     export default {
         name: 'home',
         components: {
@@ -83,10 +83,6 @@
         mounted () {
             this.fillChartData()
 
-            this.$buefy.snackbar.open({
-                message: 'Welcome back',
-                queue: false
-            })
         },
         methods: {
             randomChartData (n) {
