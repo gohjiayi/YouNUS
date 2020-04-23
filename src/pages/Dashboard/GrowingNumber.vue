@@ -1,12 +1,11 @@
 <template>
-  <div>
-    {{ prefix }}{{ newValueFormatted }}{{ suffix }}
-  </div>
+    <div>
+        {{ prefix }}{{ newValueFormatted }}{{ suffix }}
+    </div>
 </template>
 
 <script>
 import numeral from 'numeral'
-
 export default {
   name: 'GrowingNumber',
   props: {
@@ -48,12 +47,10 @@ export default {
     },
     grow (m) {
       const v = Math.ceil(this.newValue + m)
-
       if (v > this.value) {
         this.newValue = this.value
         return false
       }
-
       this.newValue = v
       setTimeout(() => {
         this.grow(m)

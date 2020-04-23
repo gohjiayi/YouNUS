@@ -1,18 +1,59 @@
 <template>
-    <div>
-        <ul>
-            <!-- <li v-for="project in projectsList" v-bind:key="project.id">
-             {{ project.projects.projectName}} From Module: {{project.projects.module}}
-            </li> -->
-            You have <b>{{projectsList.length}}</b> active projects
-        </ul>
+  <card-component>
+    <div class="level is-mobile">
+      <div class="level-item">
+        <div class="is-widget-label">
+          <h3 class="subtitle is-spaced">
+            {{ label }}
+          </h3>
+          <h1 class="title">
+            <b>{{projectsList.length}}</b> 
+          </h1>
+        </div>
+      </div>
+      <div v-if="icon" class="level-item has-widget-icon">
+        <div class="is-widget-icon">
+          <b-icon :icon="icon" size="is-large" :type="type"/>
+        </div>
+      </div>
     </div>
+  </card-component>
 </template>
 
 <script>
-    const firebase = require('../../firebase/firebaseConfig.js');
-    export default {
-        data(){ 
+import CardComponent from './CardComponent'
+import GrowingNumber from './GrowingNumber'
+const firebase = require('../../firebase/firebaseConfig.js');
+export default {
+  name: 'ActiveProjects',
+  components: { GrowingNumber, CardComponent },
+  props: {
+    icon: {
+      type: String,
+      default: null
+    },
+    number: {
+      type: Number,
+      default: 0
+    },
+    prefix: {
+      type: String,
+      default: null
+    },
+    suffix: {
+      type: String,
+      default: null
+    },
+    label: {
+      type: String,
+      default: null
+    },
+    type: {
+      type: String,
+      default: null
+    }
+  },
+  data(){ 
             return {
                 projectsList: [],
                 // counter:0
@@ -32,8 +73,13 @@
             });
 
              
-        },
-    };
+        }
+}
 </script>
 
-
+<style scoped>
+b {
+    font-size: 30px;
+    font-weight: 500;
+}
+</style>

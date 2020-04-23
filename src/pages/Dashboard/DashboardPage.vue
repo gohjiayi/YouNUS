@@ -2,8 +2,8 @@
     <div>
         <section class="section is-main-section">
             <tiles>
-                <card-widget class="tile is-child" type="is-primary" icon="laptop" label="Current Active Projects" />
-                <card-widget1 class="tile is-child" type="is-info" icon="briefcase" label="Current Active Tasks" />
+                <ActiveProjects class="tile is-child" type="is-primary" icon="laptop" label="Current Active Projects"></ActiveProjects>
+                <ActiveTasks class="tile is-child" type="is-info" icon="briefcase" label="Current Active Tasks" />
             </tiles>
 
             <tiles>
@@ -34,31 +34,23 @@
     import UpcomingTasks from './UpcomingTasks.vue'
     import ProjectCountdown from './ProjectCountdown.vue'
     import * as chartConfig from './Charts/chart.config'
-    import HeroBar from './HeroBar'
     import Tiles from './Tiles'
-    import CardWidget from './CardWidget'
     import CardComponent from './CardComponent'
-    import ClientsTableSample from './ClientsTableSample'
     import Pie from './Charts/piechart.js'
     import Bar from './Charts/barchart.js'
     import ActiveProjects from './ActiveProjects.vue'
     import ActiveTasks from './ActiveTasks.vue'
-    import CardWidget1 from './CardWidget1'
     export default {
         name: 'home',
         components: {
-            ClientsTableSample,
             CardComponent,
-            CardWidget,
             Tiles,
-            HeroBar,
             UpcomingTasks,
             ProjectCountdown,
             Pie,
             Bar,
             ActiveProjects,
             ActiveTasks,
-            CardWidget1
         },
         data () {
             return {

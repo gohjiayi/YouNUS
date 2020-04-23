@@ -2,12 +2,19 @@
     <div>
         <ul>
             <li v-for="task in tasksList" v-bind:key="task.id">
-                <ptitle> 
-                <b> Task: </b> {{ task.item.title }}
+                <ptitle>
+                    <b> Task: </b> {{ task.item.title }}
                 </ptitle>
                 <br />
-                Due Date: {{ task.item.date}} || Status: {{ task.item.status.name}}
+                Due Date: </a>{{ task.item.date}} || Status: {{ task.item.status.name}}
+                <a v-if="task.item.status.name == 'To Do'"><div class="foo todo"></div></a>
+                <a v-if="task.item.status.name == 'In Review'"><div class="foo inreview"></div></a>
+                <a v-if="task.item.status.name == 'Completed'"><div class="foo completed"></div></a>
+                <a v-if="task.item.status.name == 'Cancelled'"><div class="foo cancelled"></div></a>
+                <a v-if="task.item.status.name == 'In Progress'"><div class="foo inprogress"></div></a>
+
                 <br />
+
                 <br />
             </li>
         </ul>
@@ -45,15 +52,44 @@
 </script>
 
 <style scoped>
-    ptitle {
-        font-size: 18px
-    }
-    p pdetails {
-        padding-bottom: 100px;
-    }
-    li {
-    font-size: 14px;
-    margin-left: 10px;
-    list-style-type: circle;
-    }
+ptitle {
+    font-size: 16px;
+}
+p pdetails {
+    padding-bottom: 100px;
+}
+li {
+font-size: 14px;
+margin-left: 10px;
+list-style-type: none;
+}
+
+.foo {
+  float: left;
+  width: 18px;
+  height: 18px;
+  margin: 5px;
+  border: 1px solid rgba(0, 0, 0, .2);
+  cursor: default;
+}
+
+.todo {
+  background: rgba(158, 193, 207,1);
+}
+
+.inreview {
+  background: rgba(255, 230, 98, 1);
+}
+
+.completed {
+  background: rgba(158, 224, 158,1);
+}
+
+.cancelled {
+  background: rgba(255, 102, 99,1);
+}
+
+.inprogress {
+  background: rgba(204, 153, 201,1);
+}
 </style>

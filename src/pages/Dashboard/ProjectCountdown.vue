@@ -57,59 +57,30 @@
 </script>
 
 <style scoped>
-table {
-   width: 100%;
+td, th { 
+    color: #232d9d;
+    border: 0.5px solid #ddd;
+    padding: 8px; 
+}
    
-   td, th { 
-      color: darken($baseColor, 10%);
-      padding: $padding; 
-   }
-   
-   td {
-      text-align: center;
-      vertical-align: middle;
-      
-      &:last-child {
-         font-size: 0.95em;
-         line-height: 1.4;
-         text-align: left;
-      }
-   }
-   
-   th { 
-      background-color: lighten($baseColor, 50%);
-      font-weight: 300;
-   }
-   
-   tr {     
-      &:nth-child(2n) { background-color: white; }
-      &:nth-child(2n+1) { background-color: lighten($baseColor, 55%) }
-   }
-}
-
-ptitle {
-    font-size: 18px
-}
-
-p pdetails {
-    padding-bottom: 100px;
-}
-
-table {
-    border-collapse: collapse;
-    width: 100%;
-}
-
-td,th {
-    border: 1px solid #ddd;
-    padding: 8px;
-}
-
-th {
-    text-align: left;
-}
-
 td {
+    text-align: center;
+    vertical-align: middle;
     font-size:14px;
 }
+   
+th { 
+    background-color: #3e4a74;
+    font-weight: 500;
+    font-size:14px;
+    color:white;
+}
+
+
+tr:nth-child(even) { background: white}
+tr:nth-child(even):hover { background: #f1f1f1}
+tr:nth-child(odd) { background: #f8f9ff }
+tr:nth-child(odd):hover { background: #d9dfef}
+
+
 </style>
