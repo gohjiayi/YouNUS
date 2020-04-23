@@ -27,7 +27,7 @@
             // current date => to get upcoming tasks
             var time= new Date().toJSON().slice(0,10)
             // console.log(time)
-            firebase.db.collection('tasks').orderBy("date").limit(7).where("date", ">=", time).get().then((querySnapShot)=>{
+            firebase.db.collection('tasks').where("date", ">=", time).orderBy("date").limit(7).get().then((querySnapShot)=>{
                 let item={}
                 querySnapShot.forEach(doc=>{
                     item=doc.data();
