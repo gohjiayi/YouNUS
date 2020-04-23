@@ -17,40 +17,40 @@
 </template>
 
 <script>
-export default {
-  name: 'ModalBox',
-  props: {
-    isActive: {
-      type: Boolean,
-      default: false
+  export default {
+    name: 'ModalBox',
+    props: {
+      isActive: {
+        type: Boolean,
+        default: false
+      },
+      trashObjectName: {
+        type: String,
+        default: null
+      }
     },
-    trashObjectName: {
-      type: String,
-      default: null
-    }
-  },
-  data () {
-    return {
-      isModalActive: false
-    }
-  },
-  methods: {
-    cancel () {
-      this.$emit('cancel')
+    data () {
+      return {
+        isModalActive: false
+      }
     },
-    confirm () {
-      this.$emit('confirm')
-    }
-  },
-  watch: {
-    isActive (newValue) {
-      this.isModalActive = newValue
+    methods: {
+      cancel () {
+        this.$emit('cancel')
+      },
+      confirm () {
+        this.$emit('confirm')
+      }
     },
-    isModalActive (newValue) {
-      if (!newValue) {
-        this.cancel()
+    watch: {
+      isActive (newValue) {
+        this.isModalActive = newValue
+      },
+      isModalActive (newValue) {
+        if (!newValue) {
+          this.cancel()
+        }
       }
     }
   }
-}
 </script>

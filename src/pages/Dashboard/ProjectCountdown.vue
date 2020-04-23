@@ -9,12 +9,33 @@
             </li>
 
         </ul>
+
+        <div>
+            <table style="width:100%">
+                <tr>
+                    <th>Module </th>
+                    <th>Project Name</th>
+                    <th>Due In</th>
+                    <th>Due Date</th>
+                </tr>
+                <tr v-for="project in projectsList">
+                    <td>{{project.item.module}}</td>
+                    <td>{{project.item.projectName}}</td>
+                    <td>{{project.item.countdown}}</td>
+                    <td>{{project.item.dueDate}}</td>
+                </tr>
+            </table>
+        </div>
+
     </div>
 </template>
 
 <script>
     const firebase = require('../../firebase/firebaseConfig.js');
     export default {
+        props: {
+
+        },
         data() {
             return {
                 projectsList: [],
@@ -50,5 +71,23 @@
 
     p pdetails {
         padding-bottom: 100px;
+    }
+
+    table {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+   td,th {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+   th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        color: black;
     }
 </style>
