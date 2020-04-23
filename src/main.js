@@ -7,7 +7,7 @@ import App from "./App";
 import VueToast from 'vue-toast-notification';
 
 /* Styles */
-import '@/scss/main.scss'
+import './assets/scss/main.scss'
 import '@mdi/font/css/materialdesignicons.css'
 
 // router setup
