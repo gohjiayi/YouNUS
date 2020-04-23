@@ -21,20 +21,24 @@
 </tiles>  -->
 
             <card-component title="Project Countdown" @header-icon-click="fillChartData" icon="finance" header-icon="reload"> 
-                <ProjectCountdown></ProjectCountdown> 
+               <ProjectCountdown></ProjectCountdown> 
             </card-component> 
 
             <card-component title="Upcoming Due Dates" @header-icon-click="fillChartData" icon="finance" header-icon="reload">
                 <UpcomingTasks></UpcomingTasks>
             </card-component>
 
-            <card-component title="Number of Outstanding Tasks per Project" class="has-table has-mobile-sort-spaced">
+        <tiles>
+            <card-component title="Project Outstanding Tasks & Contribution Percentage" class="tile is-child">
                 <Bar></Bar>
             </card-component>
 
-            <card-component title="Doughnut Chart of Current Task Status Breakdown" class="has-table has-mobile-sort-spaced">
+            <card-component title="Doughnut Chart of Current Task Status" class="tile is-child">
                 <Pie></Pie>
             </card-component>
+
+
+        </tiles>
         </section>
     </div>
 </template>

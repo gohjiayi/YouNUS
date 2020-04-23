@@ -6,9 +6,25 @@ export default{
     data: () => ({
         datacollection: {
             datasets: [{
+                label: 'Contribution %',
+                yAxisID: 'B',
+                type: 'line',
+                fill: false,
+                showLine: false,
+                data:[],
+                borderWidth: 1,
+                borderColor: "grey",
+                pointRadius: 10,
+                borderWidth: 1,
+                pointBackgroundColor:[]            
+            },
+            {
+                label: 'Active Tasks',
+                yAxisID: 'A',
                 data:[],
                 backgroundColor:[]
-            }],
+            }
+            ],
             labels:[]
         },
         options: {
@@ -25,17 +41,43 @@ export default{
             },
             scales:{
                 yAxes:[{
+                    id: 'A',
+                    position: 'left',
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Active Task Count'
+                    },
+                    type: 'linear',
                     ticks:{
                         min:0
+                    },
+                    gridLines: {
+                        display:false
                     }
-
-                }]
+                },
+                {
+                    id:'B',
+                    position: 'right',
+                    type: 'linear',
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Personal Contribution (%)'
+                    },
+                    ticks:{
+                        min:0
+                    },
+                    // gridLines: {
+                    //     display:false
+                    // }
+                }
+                ]
             },
             responsive: true,
-            maintainAspectRatio: false  
+            maintainAspectRatio: false
         },
         projects: {
-            projectData: {} //Gives us a list of currently active projects 
+            projectData: {}, //Gives us a list of currently active projects 
+            TaskCounts: {}
         }  
     }),
     methods: {
@@ -52,11 +94,9 @@ export default{
                         var projectName = doc.data().projectName
                         var id = doc.id
                         var projDue = new Date(doc.data().dueDate)
-                        //if(+projDue >= +today) {
-                            if (id in projects == false) {
-                                projects[id] = mod + " - " + projectName
-                            }
-                        //}
+                        if (id in projects == false) {
+                            projects[id] = mod + " - " + projectName
+                        }
                     })
                     Object.keys(projects).forEach(key => {
                         this.projects.projectData[key] = projects[key] //May want to push project Name into labels
@@ -64,16 +104,14 @@ export default{
                 })
 
                 //need to fill colour with the module code, x-axis is the assignment 
-                // y axis -> task count and gannt count 
+                // y axis -> task count 
+                var desired = "Jia Yi"
                 var dict = {};
-                var colours  = {"To Do": "rgba(158, 193, 207,1)",  
-                                "In Progress": "rgba(204, 153, 201,1)",
-                                "In Review": "rgba(255, 230, 98, 1)",
-                                "Completed": "rgba(158, 224, 158,1)",
-                                "Canceled" : "rgba(255, 102, 99,1)"
-                }
+                var TaskCounts = {};
+
                 db.collection('tasks').get().then(querySnapShot => { 
                     querySnapShot.forEach(doc => {
+                        var user = doc.data().assignee.username
                         var proj = doc.data().projectId
                         var docDate = new Date(doc.data().date)
                         if(+docDate >= +today) { // Typecast to numbers, filter out records that have been past date
@@ -83,16 +121,44 @@ export default{
                                 dict[proj] =  1
                             }
                         }
+                        if (proj in TaskCounts) {
+                            TaskCounts[proj][0] += 1
+                        } else {
+                            TaskCounts[proj] = [1,0]
+                        }
+
+                        if(user == desired) {
+                            if(proj in TaskCounts) {
+                                TaskCounts[proj][1] += 1
+                             }
+                        }
                     })
                 Object.keys(dict).forEach(key => {
                     if (this.projects.projectData[key] != null){
-                        this.datacollection.datasets[0].data.push(dict[key])
+                        this.datacollection.datasets[1].data.push(dict[key])
                         this.datacollection.labels.push(this.projects.projectData[key])
-                        this.datacollection.datasets[0].backgroundColor.push(this.pastelColors())
+
+                        //Ensure same colour
+                        var colour = this.pastelColors()
+                        this.datacollection.datasets[1].backgroundColor.push(colour)
+                        this.datacollection.datasets[0].pointBackgroundColor.push(colour)
                     }
-                    //this.datacollection.datasets[0].backgroundColor.push(colours[key])
+                })
+
+                Object.keys(TaskCounts).forEach(key => {
+                    if (this.projects.projectData[key] != null){
+                        this.projects.TaskCounts[key] = TaskCounts[key]
+                        var percent = (TaskCounts[key][1]/TaskCounts[key][0]) * 100
+                        this.datacollection.datasets[0].data.push(percent)  
+                    }
                 })
                 
+                // Want to a pull for total number of tasks in a project
+                // Plus number that is assigned to Jia Yi 
+                // From there divide and multiply by 100
+                // Plot
+
+
                 // Pull for Gantt Tasks 
                 // var ganttdict = {}
                 // db.collection('taskGantts').get().then(querySnapShot => {

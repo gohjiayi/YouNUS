@@ -2,7 +2,13 @@
     <div>
         <ul>
             <li v-for="task in tasksList" v-bind:key="task.id">
-                {{ task.item.title }} || <b> Due Date: </b> {{ task.item.date }} || <b> Status: </b> {{ task.item.status.name }}
+                <ptitle> 
+                <b> Module and Task: </b> ({{ task.Module.module }}) {{ task.Details.title}}
+                </ptitle>
+                <br />
+                Due Date: {{ task.Details.date}} || Status: {{ task.Details.status.name}}
+                <br />
+                <br />
             </li>
         </ul>
     </div>
@@ -14,44 +20,56 @@
         data(){
             return {
                 tasksList: [],
+                modulesList:[]
             };
         },
         mounted() {
             // current date => to get upcoming tasks
             var time= new Date().toJSON().slice(0,10)
-            var projectID=0
             // console.log(time)
             firebase.db.collection('tasks').orderBy("date").limit(5).where("date", ">=", time).get().then((querySnapShot)=>{
                 let item={}
                 querySnapShot.forEach(doc=>{
                     item=doc.data();
-                    // console.log(item);
+                    // console.log(item)
                     if ((item.status.name == "In Progress") || (item.status.name == "To Do") || (item.status.name == "To Review)")) {
-                        this.tasksList.push({item});
-                    }
+                        // this.tasksList.push({item});
+                        let projectID={}
+                        projectID= item.projectId
+                        // console.log(projectID)
+                        let project={}
+                        firebase.db.collection('projects').doc(projectID).get().then((docRef) => { 
+                            project=docRef.data()
+                            if (typeof project !== 'undefined') {
+                                console.log(project)
+                                console.log(project.module)
+                                this.tasksList.push({['Module']: project, ['Details']: item})
+                            } else {
+                                // console.log("no such document")
+                                this.tasksList.push({['Module']: { ['module']: 'Unknown module'}, ['Details']: item})
+                            }
+                            })
+                        };
+                    })
                 });
-            });
-
-            // for (task in this.tasksList) {
-                // var projectID= task.item.projectId
-                // console.log(projectID);
-                // let project={}
-                // var docRef = firebase.db.collection("projects").doc(projectID);
-                // docRef.get().then(function(doc) {
-                    // if (doc.exists) {
-                        // console.log("Document data", doc.data());
-                        // project=doc.data().module
-                        // console.log("Document data", project);
-                        // this.tasksList[i] = ({project: this.tasksList[i]})
-                    // } else {
-                        // console.log("No such document!")
-                    // }
-                // })
-
-            // }
 
         },
     };
 </script>
 
+<style scoped>
+    ptitle {
+        font-size: 18px
+    }
+
+    p pdetails {
+        padding-bottom: 100px;
+    }
+
+    li {
+    font-size: 14px;
+    margin-left: 10px;
+    list-style-type: circle;
+    }
+</style>
 
