@@ -18,14 +18,15 @@
         mounted() {
             var date = new Date().toJSON().slice(0,10)
             firebase.db.collection('tasks').where("date", ">=", date).get().then((querySnapShot)=>{
-                let tasks={} 
+                let tasks={}  
                 querySnapShot.forEach(doc=>{
                     tasks=doc.data();
-                    this.tasksList.push({tasks});
+                    if ((tasks.assignee.username == "Jia Yi")) {
+                        this.tasksList.push({tasks});
+                    }
                 });
 
 
-                
             });
 
              
