@@ -7,7 +7,7 @@
             {{ label }}
           </h3>
           <h1 class="title">
-            <b>{{projectsList.length}}</b> 
+            <b>{{tasksList.length}}</b> 
           </h1>
         </div>
       </div>
@@ -25,7 +25,7 @@ import CardComponent from './CardComponent'
 import GrowingNumber from './GrowingNumber'
 const firebase = require('../../firebase/firebaseConfig.js');
 export default {
-  name: 'CardWidget',
+  name: 'CardWidget1',
   components: { GrowingNumber, CardComponent },
   props: {
     icon: {
@@ -55,21 +55,22 @@ export default {
   },
   data(){ 
             return {
-                projectsList: [],
+                tasksList: [],
                 // counter:0
             };
         }, 
         mounted() {
             var date = new Date().toJSON().slice(0,10)
-            firebase.db.collection('projects').where("dueDate", ">=", date).get().then((querySnapShot)=>{
-                let projects={} 
+            firebase.db.collection('tasks').where("date", ">=", date).get().then((querySnapShot)=>{
+                let tasks={}  
                 querySnapShot.forEach(doc=>{
-                    projects=doc.data();
-                    this.projectsList.push({projects});
+                    tasks=doc.data();
+                    if ((tasks.assignee.username == "Jia Yi")) {
+                        this.tasksList.push({tasks});
+                    }
                 });
-                // this.counter = projects.length
 
-                
+
             });
 
              
