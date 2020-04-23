@@ -25,7 +25,9 @@ export default{
         }  
     }),
     methods: {
+        //filter for user
             fetchItems: function() {
+                var desired = "Jia Yi"
                 var dict = {};
                 var colours  = {"To Do": "rgba(158, 193, 207,1)",  // To match colours used in the Task Page
                                 "In Progress": "rgba(204, 153, 201,1)",
@@ -36,9 +38,10 @@ export default{
                 var today = new Date();
                 db.collection('tasks').get().then(querySnapShot => { 
                     querySnapShot.forEach(doc => {
+                        var user = doc.data().assignee.username
                         var status = doc.data().status.name
                         var docDate = new Date(doc.data().date)
-                        if(+docDate >= +today) { // Typecast to numbers, filter out records that have been past date
+                        if(+docDate >= +today && user == desired) { // Typecast to numbers, filter out records that have been past date
                             if (status in dict) {
                                 dict[status] +=  1
                             } else {
