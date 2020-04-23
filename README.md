@@ -21,6 +21,7 @@ npm run lint
 ```
 
 ### Project Structure
+```
 \---src
     |   App.vue
     |   globalDirectives.js
@@ -166,7 +167,7 @@ npm run lint
                 taskMutation.js
                 taskState.js
                 
-
+```
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
