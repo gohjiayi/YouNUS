@@ -20,12 +20,12 @@ const routes = [
         name: 'dashboard',
         component: loadPage("Dashboard/DashboardPage")
       },
-      {
-        path: '/auth',
-        name: 'auth',
-        component: loadPage("Authentication")
-      },
     ]
+  },
+  {
+    path: '/auth',
+    name: 'auth',
+    component: loadPage("Authentication")
   },
   {
     path: "/",

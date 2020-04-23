@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper" :class="{ 'nav-open': $sidebar.showSidebar }">
-    <app-header />
+    <app-header/>
     <notifications></notifications>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <side-bar style="margin-top:65px">

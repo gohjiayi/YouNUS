@@ -1,7 +1,13 @@
 <template>
+
     <div class="login-wrap">
 
         <div class="login-html">
+            <nav class="navbar navbar-dark" style="text-align:center" width="85" height="70">
+                <a class="navbar-brand">
+                    <img src="/youNUS_logo2.png" width="85" height="70">
+                </a>
+            </nav>
             <div v-if="error" class="alert alert-danger">{{error}}</div>
             <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
             <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
@@ -61,7 +67,6 @@
 
 <script>
     import firebase from "firebase";
-
     export default {
         data() {
             return {
@@ -70,7 +75,7 @@
                     email: "",
                     password: ""
                 },
-                error: null
+                error: null,
             };
         },
         methods: {
@@ -136,8 +141,8 @@
     .login-wrap {
         width: 100%;
         margin: auto;
-        max-width: 525px;
-        min-height: 670px;
+        max-width: 600px;
+        min-height: 770px;
         position: relative;
         background: url(https://raw.githubusercontent.com/khadkamhn/day-01-login-form/master/img/bg.jpg) no-repeat center;
         box-shadow: 0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
@@ -173,6 +178,8 @@
         .login-form .group .label,
         .login-form .group .button {
             text-transform: uppercase;
+            height: auto;
+            opacity: 1.2;
         }
 
         .login-html .tab {
@@ -207,6 +214,8 @@
                 width: 100%;
                 color: #fff;
                 display: block;
+                opacity: 1.2
+
             }
 
             .login-form .group .input,
@@ -215,6 +224,8 @@
                 padding: 15px 20px;
                 border-radius: 25px;
                 background: rgba(255,255,255,.1);
+                opacity: 1.2
+
             }
 
             .login-form .group input[data-type="password"] {
@@ -229,6 +240,8 @@
 
             .login-form .group .button {
                 background: #1161ee;
+                opacity: 1.2
+
             }
 
             .login-form .group label .icon {
