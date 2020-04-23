@@ -7,17 +7,17 @@
             </tiles>
 
             <card-component title="Project Countdown" @header-icon-click="fillChartData" icon="finance" header-icon="reload">
-               <ProjectCountdown></ProjectCountdown>
+                <ProjectCountdown></ProjectCountdown>
             </card-component>
 
             <card-component title="Upcoming Due Dates" @header-icon-click="fillChartData" icon="finance" header-icon="reload">
                 <UpcomingTasks></UpcomingTasks>
             </card-component>
 
-        <tiles>
-            <card-component title="Project Outstanding Tasks & Contribution Percentage" class="tile is-child">
-                <Bar></Bar>
-            </card-component>
+            <tiles>
+                <card-component title="Project Outstanding Tasks & Contribution Percentage" class="tile is-child">
+                    <Bar></Bar>
+                </card-component>
 
                 <card-component class="tile is-child" title="Upcoming Due Dates" @header-icon-click="fillChartData" icon="finance" header-icon="reload">
                     <UpcomingTasks></UpcomingTasks>
@@ -52,7 +52,6 @@
     import ActiveProjects from './ActiveProjects.vue'
     import ActiveTasks from './ActiveTasks.vue'
     import CardWidget1 from './CardWidget1'
-
     export default {
         name: 'home',
         components: {
@@ -87,16 +86,13 @@
         },
         mounted () {
             this.fillChartData()
-
         },
         methods: {
             randomChartData (n) {
                 const data = []
-
                 for (let i = 0; i < n; i++) {
                     data.push(Math.round(Math.random() * 200))
                 }
-
                 return data
             },
             fillChartData () {
