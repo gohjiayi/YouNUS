@@ -7,21 +7,21 @@
             </tiles>
 
             <tiles>
-                <card-component class="tile is-child" title="Project Countdown" @header-icon-click="fillChartData" icon="finance" header-icon="reload">
+                <card-component class="tile is-child" title="Project Countdown" >
                     <ProjectCountdown></ProjectCountdown>
                 </card-component>
 
-                <card-component class="tile is-child" title="Upcoming Due Dates" @header-icon-click="fillChartData" icon="finance" header-icon="reload">
+                <card-component class="tile is-child" title="Upcoming Due Dates">
                     <UpcomingTasks></UpcomingTasks>
                 </card-component>
             </tiles>
 
             <tiles>
-                <card-component title="Project Outstanding Tasks & Contribution Percentage" class="tile is-child">
+                <card-component title="Current Active Tasks & Project Contribution" class="tile is-child">
                     <Bar></Bar>
                 </card-component>
 
-                <card-component title="Doughnut Chart of Current Task Status" class="tile is-child">
+                <card-component title="Current Task Status" class="tile is-child">
                     <Pie></Pie>
                 </card-component>
             </tiles>

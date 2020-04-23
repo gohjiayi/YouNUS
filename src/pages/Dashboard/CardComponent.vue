@@ -40,4 +40,14 @@ export default {
 }
 </script>
 
+<style scoped>
+p {
+    font-size: 16px;
+    color: #42529b
+}
+div header {
+    background-color:#f7f7f7;
+}
+</style>
+
 

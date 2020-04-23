@@ -77,3 +77,10 @@ export default {
         }
 }
 </script>
+
+<style scoped>
+b {
+    font-size: 30px;
+    font-weight: 500;
+}
+</style>

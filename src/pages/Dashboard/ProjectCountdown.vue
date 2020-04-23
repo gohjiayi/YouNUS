@@ -1,15 +1,5 @@
 <template>
     <div>
-        <ul>
-            <li v-for="project in projectsList" v-bind:key="project.id">
-                <ptitle>{{ project.item.module }}: {{ project.item.projectName }}</ptitle>
-                <p>
-                    <pdetails>Due <b>in {{ project.item.countdown }}</b>, on {{ project.item.dueDate }}</pdetails>
-                </p>
-            </li>
-
-        </ul>
-
         <div>
             <table style="width:100%">
                 <tr>
@@ -50,7 +40,9 @@
                     item = doc.data();
                     const diffTime = Math.abs(Date.parse(item.dueDate) - new Date());
                     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24) - 1);
-                    if (diffDays == 1) {
+                    if (diffDays == 0) {
+                        item.countdown = "less than a day";
+                    } else if(diffDays == 1) {
                         item.countdown = diffDays + " day";
                     } else {
                         item.countdown = diffDays + " days";
