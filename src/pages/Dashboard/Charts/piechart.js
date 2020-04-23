@@ -27,14 +27,14 @@ export default{
     methods: {
             fetchItems: function() {
                 var dict = {};
-                var colours  = {"To Do": "rgba(158, 193, 207,1)",  
+                var colours  = {"To Do": "rgba(158, 193, 207,1)",  // To match colours used in the Task Page
                                 "In Progress": "rgba(204, 153, 201,1)",
                                 "In Review": "rgba(255, 230, 98, 1)",
                                 "Completed": "rgba(158, 224, 158,1)",
                                 "Canceled" : "rgba(255, 102, 99,1)"
                 }
                 var today = new Date();
-                db.collection('tasks').get().then(querySnapShot => { //If got time join to projects to get > Today but < project deadline
+                db.collection('tasks').get().then(querySnapShot => { 
                     querySnapShot.forEach(doc => {
                         var status = doc.data().status.name
                         var docDate = new Date(doc.data().date)
