@@ -94,7 +94,7 @@ export default{
                         var projectName = doc.data().projectName
                         var id = doc.id
                         var projDue = new Date(doc.data().dueDate)
-                        if (id in projects == false) {
+                        if (id in projects == false && +projDue >= +today) {
                             projects[id] = mod + " - " + projectName
                         }
                     })
