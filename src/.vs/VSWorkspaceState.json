@@ -1,11 +1,14 @@
 {
   "ExpandedNodes": [
     "",
+    "\\assets",
     "\\components",
     "\\components\\SidebarPlugin",
     "\\pages",
-    "\\pages\\Layout"
+    "\\pages\\Dashboard",
+    "\\pages\\LandingPage",
+    "\\routes"
   ],
-  "SelectedNode": "\\pages\\Dashboard.vue",
+  "SelectedNode": "\\pages\\Dashboard\\ProjectCountdown.vue",
   "PreviewInSolutionExplorer": false
 }

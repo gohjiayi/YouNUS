@@ -15,7 +15,7 @@
                 <form action="#" @submit.prevent="submitLogin">
                     <div class="sign-in-htm">
                         <div class="group">
-                            <label for="email" class="label">Email</label>
+                            <label for="email" class="label">Email Address</label>
                             <input id="email1" type="email" class="input" value="" required autofocus v-model="form.email">
                         </div>
                         <div class="group">
@@ -38,16 +38,16 @@
                 <form action="#" @submit.prevent="submitRegister">
                     <div class="sign-up-htm">
                         <div class="group">
-                            <label for="user" class="label">Username</label>
-                            <input id="user2" type="text" class="input" value required autofocus v-model="form.name">
+                            <label for="pass" class="label">Email Address</label>
+                            <input id="email2" type="email" class="input" value=" required autofocus" v-model="form.email">
                         </div>
                         <div class="group">
                             <label for="password" class="label">Password</label>
                             <input id="password2" type="password" class="input" required v-model="form.password">
                         </div>
                         <div class="group">
-                            <label for="pass" class="label">Email Address</label>
-                            <input id="email2" type="email" class="input" value=" required autofocus" v-model="form.email">
+                            <label for="user" class="label">Username</label>
+                            <input id="user2" type="text" class="input" value required autofocus v-model="form.name">
                         </div>
                         <div class="group">
                             <button type="submit" class="button">Sign Up</button>

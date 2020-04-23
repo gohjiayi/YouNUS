@@ -7,22 +7,22 @@
             </tiles>
 
             <tiles>
-                <card-component class="tile is-child" title="Project Countdown">
-                    <ProjectCountdown></ProjectCountdown>
-                </card-component>
-
-                <card-component class="tile is-child" title="Upcoming Tasks">
-                    <UpcomingTasks></UpcomingTasks>
-                </card-component>
-            </tiles>
-
-            <tiles>
                 <card-component title="Current Active Tasks & Project Contribution" class="tile is-child">
                     <Bar></Bar>
                 </card-component>
 
                 <card-component title="Current Task Status" class="tile is-child">
                     <Pie></Pie>
+                </card-component>
+            </tiles>
+
+            <tiles>
+                <card-component class="tile is-child" title="Project Countdown">
+                    <ProjectCountdown></ProjectCountdown>
+                </card-component>
+
+                <card-component class="tile is-child" title="Upcoming Tasks">
+                    <UpcomingTasks></UpcomingTasks>
                 </card-component>
             </tiles>
         </section>
