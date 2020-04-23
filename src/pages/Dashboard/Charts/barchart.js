@@ -15,8 +15,8 @@ export default{
                 borderWidth: 1,
                 borderColor: "grey",
                 pointRadius: 10,
-                borderWidth: 1,
-                pointBackgroundColor:[]            
+                borderWidth: 1
+                //pointBackgroundColor:"grey"           
             },
             {
                 label: 'Active Tasks',
@@ -141,7 +141,7 @@ export default{
                         //Ensure same colour
                         var colour = this.pastelColors()
                         this.datacollection.datasets[1].backgroundColor.push(colour)
-                        this.datacollection.datasets[0].pointBackgroundColor.push(colour)
+                        //this.datacollection.datasets[0].pointBackgroundColor.push(colour)
                     }
                 })
 
@@ -149,7 +149,7 @@ export default{
                     if (this.projects.projectData[key] != null){
                         this.projects.TaskCounts[key] = TaskCounts[key]
                         var percent = (TaskCounts[key][1]/TaskCounts[key][0]) * 100
-                        this.datacollection.datasets[0].data.push(percent)  
+                        this.datacollection.datasets[0].data.push((Math.round(percent * 10) / 10).toFixed(1))  
                     }
                 })
                 
