@@ -29,9 +29,12 @@
                 <UpcomingTasks></UpcomingTasks>
             </card-component>
 
+            <card-component title="Number of Outstanding Tasks per Project" class="has-table has-mobile-sort-spaced">
+                <Bar></Bar>
+            </card-component>
+
             <card-component title="Doughnut Chart of Current Task Status Breakdown" class="has-table has-mobile-sort-spaced">
                 <Pie></Pie>
-                
             </card-component>
         </section>
     </div>
@@ -48,6 +51,7 @@
     import CardComponent from './CardComponent'
     import ClientsTableSample from './ClientsTableSample'
     import Pie from './Charts/piechart.js'
+    import Bar from './Charts/barchart.js'
     import ActiveProjects from './ActiveProjects.vue'
     import ActiveTasks from './ActiveTasks.vue'
     
@@ -62,6 +66,7 @@
             UpcomingTasks,
             ProjectCountdown,
             Pie,
+            Bar,
             ActiveProjects,
             ActiveTasks
         },
