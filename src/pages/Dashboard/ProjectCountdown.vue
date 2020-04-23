@@ -2,13 +2,13 @@
     <div>
         <div>
             <table style="width:100%">
-                <tr>
+                <tr name="header">
                     <th>Module </th>
                     <th>Project Name</th>
                     <th>Due In</th>
                     <th>Due Date</th>
                 </tr>
-                <tr v-for="project in projectsList">
+                <tr name="content" v-for="project in projectsList">
                     <td>{{project.item.module}}</td>
                     <td>{{project.item.projectName}}</td>
                     <td>{{project.item.countdown}}</td>
@@ -57,29 +57,59 @@
 </script>
 
 <style scoped>
-    ptitle {
-        font-size: 18px
-    }
+table {
+   width: 100%;
+   
+   td, th { 
+      color: darken($baseColor, 10%);
+      padding: $padding; 
+   }
+   
+   td {
+      text-align: center;
+      vertical-align: middle;
+      
+      &:last-child {
+         font-size: 0.95em;
+         line-height: 1.4;
+         text-align: left;
+      }
+   }
+   
+   th { 
+      background-color: lighten($baseColor, 50%);
+      font-weight: 300;
+   }
+   
+   tr {     
+      &:nth-child(2n) { background-color: white; }
+      &:nth-child(2n+1) { background-color: lighten($baseColor, 55%) }
+   }
+}
 
-    p pdetails {
-        padding-bottom: 100px;
-    }
+ptitle {
+    font-size: 18px
+}
 
-    table {
-        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-        border-collapse: collapse;
-        width: 100%;
-    }
+p pdetails {
+    padding-bottom: 100px;
+}
 
-   td,th {
-        border: 1px solid #ddd;
-        padding: 8px;
-    }
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
 
-   th {
-        padding-top: 12px;
-        padding-bottom: 12px;
-        text-align: left;
-        color: black;
-    }
+td,th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+th {
+    text-align: left;
+}
+
+td {
+    font-size:14px;
+}
 </style>

@@ -2,24 +2,16 @@
     <div>
         <section class="section is-main-section">
             <tiles>
-                <card-widget class="tile is-child" type="is-primary" icon="laptop"  label="Current Active Projects"/>
-                <card-widget1 class="tile is-child" type="is-info" icon="briefcase" label="Current Active Tasks"/>
+                <card-widget class="tile is-child" type="is-primary" icon="laptop" label="Current Active Projects" />
+                <card-widget1 class="tile is-child" type="is-info" icon="briefcase" label="Current Active Tasks" />
             </tiles>
 
-            <card-component title="Project Countdown" @header-icon-click="fillChartData" icon="finance" header-icon="reload">
-                <ProjectCountdown></ProjectCountdown>
-            </card-component>
-
-            <card-component title="Upcoming Due Dates" @header-icon-click="fillChartData" icon="finance" header-icon="reload">
-                <UpcomingTasks></UpcomingTasks>
-            </card-component>
-
             <tiles>
-                <card-component class="tile is-child" title="Project Countdown" >
+                <card-component class="tile is-child" title="Project Countdown">
                     <ProjectCountdown></ProjectCountdown>
                 </card-component>
 
-                <card-component class="tile is-child" title="Upcoming Due Dates">
+                <card-component class="tile is-child" title="Upcoming Tasks">
                     <UpcomingTasks></UpcomingTasks>
                 </card-component>
             </tiles>
