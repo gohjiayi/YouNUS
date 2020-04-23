@@ -5,20 +5,9 @@
         </hero-bar>
         <section class="section is-main-section">
             <tiles>
-                <card-widget class="tile is-child" type="is-primary" icon="account-multiple"  label="Current Active Projects"/>
-                <card-widget1 class="tile is-child" type="is-info" icon="cart-outline" label="Current Active Tasks"/>
+                <card-widget class="tile is-child" type="is-primary" icon="laptop"  label="Current Active Projects"/>
+                <card-widget1 class="tile is-child" type="is-info" icon="briefcase" label="Current Active Tasks"/>
             </tiles>
-<!-- <tiles>
-           <card-component title="Current Active Projects" @header-icon-click="fillChartData" icon="finance" header-icon="reload">
-                <ActiveProjects></ActiveProjects>
-            </card-component>
-
-
-
-           <card-component title="Current Active Tasks" @header-icon-click="fillChartData" icon="finance" header-icon="reload">
-                <ActiveTasks></ActiveTasks>
-            </card-component>
-</tiles>  -->
 
             <card-component title="Project Countdown" @header-icon-click="fillChartData" icon="finance" header-icon="reload"> 
                <ProjectCountdown></ProjectCountdown> 
@@ -58,6 +47,7 @@
     import ActiveProjects from './ActiveProjects.vue'
     import ActiveTasks from './ActiveTasks.vue'
     import CardWidget1 from './CardWidget1'
+    
     export default {
         name: 'home',
         components: {
