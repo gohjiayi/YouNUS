@@ -30,7 +30,7 @@ const routes = [
   {
     path: "/",
     component: DashboardLayout,
-    redirect: "/tasks",
+    redirect: "/ganttchart",
     children: [
       {
         path: "tasks",

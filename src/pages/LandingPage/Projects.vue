@@ -91,7 +91,7 @@ export default {
     },
     gotohome(project){
       this.UPDATE_SELECTED_PROJECT(project)
-      this.$router.push("/tasks")
+      this.$router.push("/ganttchart")
     }
   }
 }

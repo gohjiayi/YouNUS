@@ -4,19 +4,21 @@
     <notifications></notifications>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <side-bar style="margin-top:65px">
-        <sidebar-link to="/tasks">
-            <md-icon>check_box</md-icon>
-            <p>Tasks</p>
-        </sidebar-link>
+
         <mobile-menu slot="content"></mobile-menu>
-        <sidebar-link to="/resources">
-            <md-icon>folder_shared</md-icon>
-            <p>Resources</p>
-        </sidebar-link>
         <sidebar-link to="/ganttchart">
             <md-icon>low_priority</md-icon>
             <p>Gantt Chart</p>
         </sidebar-link>
+        <sidebar-link to="/tasks">
+            <md-icon>check_box</md-icon>
+            <p>Tasks</p>
+        </sidebar-link>
+        <sidebar-link to="/resources">
+            <md-icon>folder_shared</md-icon>
+            <p>Resources</p>
+        </sidebar-link>
+
         <sidebar-link to="/calendar">
             <md-icon>calendar_today</md-icon>
             <p>Calendar</p>
