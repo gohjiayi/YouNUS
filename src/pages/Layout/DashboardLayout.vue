@@ -3,7 +3,7 @@
     <app-header/>
     <notifications></notifications>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <side-bar style="margin-top:65px">
+    <side-bar style="margin-top:70px">
 
         <mobile-menu slot="content"></mobile-menu>
         <sidebar-link to="/ganttchart">
@@ -30,7 +30,7 @@
         </sidebar-link>
     </side-bar>
 
-    <div class="main-panel" style="margin-top:65px">
+    <div class="main-panel" style="margin-top:70px">
       <top-navbar></top-navbar>
       <dashboard-content> </dashboard-content>
 
